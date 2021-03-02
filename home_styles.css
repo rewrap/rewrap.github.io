@@ -26,4 +26,7 @@
 
 
 /* Company info styles */
+#companyInfoContainer {
+    width: 100%;
+}
 /* Products section styles */
