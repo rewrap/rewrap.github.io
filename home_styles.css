@@ -1,0 +1,29 @@
+/* Showcase section styles //////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+#showcaseBackground {
+    height: 90vh;
+    width: 100%;
+    background-image: url("ui_images/tempshowcase.gif");
+    /* background-image: url("https://cdn.discordapp.com/emojis/816165025675870258.gif?v=1"); */
+    background-size: auto 100%;
+}
+#showcaseText {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(26, 26, 26, 0.75);
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+#showcaseText h1 {
+    font-size: 125px;
+    color: white;
+    margin: 0;
+}
+#showcaseText p {
+    color: white;
+}
+
+
+/* Company info styles */
+/* Products section styles */
