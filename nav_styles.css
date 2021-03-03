@@ -7,19 +7,21 @@
     min-height: 90px;
     background-color: #1A1A1A;
     align-items: center;
+    overflow-x: hidden;
 }
 #navLogo {
     position: absolute;
+    left: 0;
     z-index: 1;
     width: auto;
-    height: 75%;
+    height: 70%;
     margin: 0 0 0 10px;
     cursor: pointer;
 }
 #navContainer ul {
     display: flex;
     height: 10vh;
-    min-height: 90px;
+    min-height: 80px;
     margin: 0 auto 0 auto;
     padding: 0;
     align-items: center;
@@ -34,7 +36,7 @@
 }
 #navContainer a {
     font-family: AppleGothic, sans-serif;
-    font-size: 28px;
+    font-size: 25px;
     text-decoration: none;
     color: white;
     cursor: pointer;
@@ -42,4 +44,18 @@
     border-color: white;
     border-top-style: solid;
     border-top-color: black; */
+}
+#cartIcon {
+    position: absolute;
+    right: 0;
+    z-index: 1;
+    width: auto;
+    height: 40%;
+    margin: 0 25px 0 0;
+    cursor: pointer;
+}
+@media (max-width: 1200px) {
+    #navContainer ul {
+        display: none;
+    }
 }

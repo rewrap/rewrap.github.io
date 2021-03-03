@@ -18,7 +18,6 @@
     font-family: AppleGothic, sans-serif;
 }
 html, body {
-    overflow: hidden;
     max-width: 100vw;
     margin: 0;
 }

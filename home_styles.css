@@ -11,22 +11,99 @@
     height: 100%;
     width: 100%;
     background-color: rgba(26, 26, 26, 0.75);
-    align-items: center;
     justify-content: center;
+    align-items: center;
     flex-direction: column;
 }
 #showcaseText h1 {
-    font-size: 125px;
-    color: white;
+    font-size: 10vw;
     margin: 0;
+    text-align: center;
+    color: white;
 }
 #showcaseText p {
+    font-size: 1.5vw;
+    text-align: center;
     color: white;
 }
 
 
 /* Company info styles */
-#companyInfoContainer {
+#companyInfoContainer { /* Container that holds info sections */
+    display: flex;
     width: 100%;
+    height: 430px;
+    background-color: #1A1A1A;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    text-align: center;
 }
+.infoSection { /* 3 main info sections*/
+    display: flex;
+    width: 33%;
+    height: 380px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+#middleInfoSection {
+    border-left-style: solid;
+    border-right-style: solid;
+    border-left-color: white;
+    border-right-color: white;
+}
+.infoSection img {
+    width: 180px;
+    height: 180px;
+}
+.infoSection div {
+    height: auto;
+}
+.infoSection h2 {
+    font-family: Timeburner, sans-serif;
+    font-size: 40px;
+    font-weight: 500;
+    margin: 20px 0 2px 0;
+    white-space: nowrap;
+}
+.infoSection p {
+    font-size: 20px;
+    margin: 20px;
+}
+@media (max-width: 1200px) {
+    #companyInfoContainer {
+        height: auto;
+    }
+    .infoSection { /* 3 main info sections*/
+        width: 100%;
+        height: 210px;
+        padding: 10px 0 10px 10px;
+    }
+    #middleInfoSection {
+        border-style: hidden;
+    }
+    .infoSection div {
+        width: 75%;
+    }
+    .infoSection img {
+        max-width: 25%;
+        max-height: 100%;
+    }
+}
+@media (max-width: 600px) {
+    .infoSection h2 {
+        font-size: 32px;
+    }
+    .infoSection p {
+        font-size: 16px;
+    }
+}
+
+
+
+
 /* Products section styles */
