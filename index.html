@@ -65,10 +65,10 @@
             <p>Some wacky text here describing the product</p>
             <div><a>SHOP HERE</a></div>
         </div>
-        <div id="imgDiv1" class="imgDiv"></div>
+        <div id="imgDiv1" class="imgDiv parallaxWindow"></div>
     </div>
     <div class="parallaxContainer textRight">
-        <div id="imgDiv2" class="imgDiv"></div>
+        <div id="imgDiv2" class="imgDiv parallaxWindow"></div>
         <div class="textDiv">
             <h2>Custom</h2>
             <p>Some wacky text here describing the product</p>
@@ -81,7 +81,26 @@
             <p>Some wacky text here describing the product</p>
             <div><a>SHOP HERE</a></div>
         </div>
-        <div id="imgDiv3"" class="imgDiv"></div>
+        <div id="imgDiv3"" class="imgDiv parallaxWindow"></div>
     </div>
+
+    <!------------->
+    <!-- Scripts -->
+    <!------------->
+
+    <!-- Disable parallax on iOS -->
+    <script>
+        var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        var parallaxWindows = document.getElementsByClassName("parallaxWindow");
+
+        if (isIOS) {
+            console.log('This is a IOS device');
+            for (item of parallaxWindows) {
+                item.style.backgroundAttachment = "scroll";
+            }
+        } else {
+            console.log('This is Not a IOS device :}');
+        }
+    </script>
 </body>
 </html>

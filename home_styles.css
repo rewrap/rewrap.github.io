@@ -105,8 +105,6 @@
 }
 
 
-
-
 /* Products section styles //////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 .parallaxContainer {
     display: flex;
@@ -124,17 +122,17 @@
 .parallaxContainer > div {
     width: 50%;
 }
-.textLeft .imgDiv {
+.parallaxWindow {
     background-attachment: fixed;
-    background-position: 100% 50%;
-    background-size: 50% auto;
     background-repeat: no-repeat;
 }
+.textLeft .imgDiv {
+    background-position: 100% 50%;
+    background-size: 50% auto;
+}
 .textRight .imgDiv {
-    background-attachment: fixed;
     background-position: 0% 50%;
     background-size: 50% auto;
-    background-repeat: no-repeat;
 }
 #imgDiv1 {
     background-image: url(ui_images/product_image_temp1.jpg);
@@ -170,7 +168,7 @@
     background-color: black;
     cursor: pointer;
 }
-@media (max-width: 600px) {
+@media (max-width: 750px) {
     .parallaxContainer {
         height: auto;
     }
@@ -178,14 +176,14 @@
         width: 100%;
     }
     .textLeft .imgDiv, .textRight .imgDiv {
-        height: 65vh;
+        height: 600px;
         background-position: 50% 50%;
         background-size: cover;
     }
     .textDiv {
         padding: 5px 0 20px 0;
         text-align: center;
-        min-height: 25vh;
+        height: auto;
     }
     .textDiv h2 {
         font-size: 40px;
