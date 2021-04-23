@@ -40,9 +40,9 @@
     height: 100%;
     margin: 0 30px 0 30px;
     border-bottom-style: solid;
-    border-bottom-color: black;
+    border-bottom-color: #1A1A1A;
     border-top-style: solid;
-    border-top-color: black;
+    border-top-color: #1A1A1A;
 }
 #navContainer a {
     padding: 10px 0 10px 0;
