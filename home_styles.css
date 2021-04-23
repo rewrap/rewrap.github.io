@@ -1,14 +1,36 @@
 /* Showcase section styles //////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 #showcaseBackground {
-    height: 90vh;
+    display: flex;
+    height: 93vh;
     width: 100%;
-    background-image: url("ui_images/tempshowcase.gif");
+    background-color: white;
+    /* background-image: url("ui_images/showcase_gif50ms.gif"); */
+    /* background-image: url("ui_images/tempshowcase.gif"); */
     /* background-image: url("https://cdn.discordapp.com/emojis/816165025675870258.gif?v=1"); */
     background-size: auto 100%;
+    overflow-x: hidden;
+}
+#showcaseBackground img {
+    margin-left: 2vw;
+    align-self: center;
+    height: 70vh;
+    animation-name: scrollImage;
+    animation-duration: 35s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: normal;
+
+}
+@keyframes scrollImage {
+    0%{transform: translate(0);}
+    100%{transform: translate(-75.28%);}
 }
 #showcaseText {
+    position: absolute;
+    z-index: 2;
+    top: 90px;
     display: flex;
-    height: 100%;
+    height: 93vh;
     width: 100%;
     background-color: rgba(26, 26, 26, 0.75);
     justify-content: center;
@@ -167,6 +189,8 @@
     font-size: 40px;
     padding: 10px;
     text-decoration: none;
+    /* line-height: 1.6; */
+    white-space: nowrap;
     color: white;
     background-color: black;
     cursor: pointer;

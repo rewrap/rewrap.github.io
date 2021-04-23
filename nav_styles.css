@@ -1,6 +1,7 @@
 #navContainer {
     display: flex;
     position: sticky;
+    z-index: 3;
     top:0;
     width: 100%;
     min-height: 90px;
@@ -12,7 +13,7 @@
 #navLogo {
     position: absolute;
     left: 0;
-    z-index: 1;
+    z-index: 3;
     width: auto;
     height: 70%;
     /* margin: 0 0 0 10px; */
