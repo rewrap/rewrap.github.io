@@ -1,0 +1,31 @@
+#footerContainer {
+    width: 100%;
+    min-height: 93vh;
+    padding: 7vw 7vw 0 7vw;
+    background-image: url(ui_images/footer_background.png);
+    background-size: 550px;
+    background-repeat: repeat-x;
+}
+#footerSocials {
+    display: flex;
+    width: 100%;
+    height: auto;
+    margin: 0 0 40px 0;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: baseline;
+    /* align-items: center; */
+}
+#footerSocials h1 {
+    margin: 0;
+    color: white;
+    font-size: 80px;
+}
+#footerSocials img {
+    width: auto;
+    height: 60px;
+    padding: 0 0 0 50px;
+}
+#footerSocials img:hover {
+    opacity: 0.75;
+}
