@@ -138,10 +138,13 @@
     background-image: url(ui_images/product_image_temp1.jpg);
 }
 #imgDiv2 {
-    background-image: url(ui_images/product_image_temp2.jpg);
+    background-image: url(ui_images/product_image_temp2V2.jpg);
 }
 #imgDiv3 {
     background-image: url(ui_images/product_image_temp3.jpg);
+}
+#imgDiv4 {
+    background-image: url(ui_images/product_image_temp4.jpg);
 }
 .textDiv {
     display: flex;

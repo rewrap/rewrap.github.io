@@ -14,12 +14,12 @@
 <body>
     <!-- Nav bar -->
     <div id="navContainer">
-        <img id="navLogo" src="ui_images/nav_logo.svg" alt="ReWrap Logo"></img>
+        <img id="navLogo" src="ui_images/nav_logo.svg" alt="ReWrap Logo" onclick="scrollToSection('showcaseBackground')"></img>
         <ul>
-            <li><a>What's New</a></li>
-            <li><a>Custom</a></li>
-            <li><a>Presets</a></li>
-            <li><a>Stickers</a></li>
+            <li id="whatnewLI"><a onclick="scrollToSection('whatnewBox')">What's New</a></li>
+            <li id="customLI"><a onclick="scrollToSection('customBox')">Custom</a></li>
+            <li id="presetsLI"><a onclick="scrollToSection('presetsBox')">Presets</a></li>
+            <li id="stickersLI"><a onclick="scrollToSection('stickersBox')">Stickers</a></li>
         </ul>
         <!-- <img id="cartIcon" src="ui_images/cart_icon.svg" alt="cart"></img> -->
         <div id="helpIcon"><p>?</p></div>
@@ -59,34 +59,104 @@
     </div>
 
     <!-- Parallax scrolling section -->
-    <div class="parallaxContainer textLeft">
+    <div id="whatnewBox" class="parallaxContainer textLeft">
         <div class="textDiv">
-            <h2>What's new</h2>
+            <h2 id="whatnewText">What's new</h2>
             <p>Some wacky text here describing the product</p>
             <div><a>SHOP HERE</a></div>
         </div>
         <div id="imgDiv1" class="imgDiv parallaxWindow"></div>
     </div>
-    <div class="parallaxContainer textRight">
+    <div id="customBox" class="parallaxContainer textRight">
         <div id="imgDiv2" class="imgDiv parallaxWindow"></div>
         <div class="textDiv">
-            <h2>Custom</h2>
+            <h2 id="customText">Custom</h2>
             <p>Some wacky text here describing the product</p>
             <div><a>SHOP HERE</a></div>
         </div>
     </div>
-    <div class="parallaxContainer textLeft">
+    <div id="presetsBox" class="parallaxContainer textLeft">
         <div class="textDiv">
-            <h2>Presets</h2>
+            <h2 id="presetsText">Presets</h2>
             <p>Some wacky text here describing the product</p>
             <div><a>SHOP HERE</a></div>
         </div>
         <div id="imgDiv3"" class="imgDiv parallaxWindow"></div>
     </div>
+    <div id="stickersBox" class="parallaxContainer textRight">
+        <div id="imgDiv4" class="imgDiv parallaxWindow"></div>
+        <div class="textDiv">
+            <h2 id="stickersText">Stickers</h2>
+            <p>Some wacky text here describing the product</p>
+            <div><a>SHOP HERE</a></div>
+        </div>
+    </div>
 
     <!------------->
     <!-- Scripts -->
     <!------------->
+    
+    <!-- Scroll to section -->
+    <script>
+        function scrollToSection(targetSection) {
+            item = document.getElementById(targetSection);
+            console.log(item);
+            item.scrollIntoView({behavior: "smooth", block: "end"});
+        }
+    </script>
+
+    <!-- Check if visible -->
+    <script>
+        document.addEventListener("scroll", changeUnderlines);
+
+        function changeUnderlines() {
+            var li = document.getElementById("whatnewLI");
+            if(isInViewport(document.getElementById("whatnewText"))) {
+                li.style.borderBottomColor = "var(--specialGreen)";
+                li.firstChild.style.color = "var(--specialGreen)";
+            } else {
+                li.style.borderBottomColor = "black";
+                li.firstChild.style.color = "white";
+            }
+
+            li = document.getElementById("customLI")
+            if(isInViewport(document.getElementById("customText"))) {
+                li.style.borderBottomColor = "var(--specialGreen)";
+                li.firstChild.style.color = "var(--specialGreen)";
+            } else {
+                li.style.borderBottomColor = "black";
+                li.firstChild.style.color = "white";
+            }
+
+            li = document.getElementById("presetsLI")
+            if(isInViewport(document.getElementById("presetsText"))) {
+                li.style.borderBottomColor = "var(--specialGreen)";
+                li.firstChild.style.color = "var(--specialGreen)";
+            } else {
+                li.style.borderBottomColor = "black";
+                li.firstChild.style.color = "white";
+            }
+
+            li = document.getElementById("stickersLI")
+            if(isInViewport(document.getElementById("stickersText"))) {
+                li.style.borderBottomColor = "var(--specialGreen)";
+                li.firstChild.style.color = "var(--specialGreen)";
+            } else {
+                li.style.borderBottomColor = "black";
+                li.firstChild.style.color = "white";
+            }
+        }
+
+        function isInViewport(element) {
+            const rect = element.getBoundingClientRect();
+            return (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+}
+    </script>
 
     <!-- Disable parallax on iOS -->
     <script>

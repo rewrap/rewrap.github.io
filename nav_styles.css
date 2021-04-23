@@ -7,6 +7,7 @@
     background-color: #1A1A1A;
     align-items: center;
     overflow-x: hidden;
+    overflow-y: hidden;
 }
 #navLogo {
     position: absolute;
@@ -14,12 +15,17 @@
     z-index: 1;
     width: auto;
     height: 70%;
-    margin: 0 0 0 10px;
+    /* margin: 0 0 0 10px; */
+    transform: translate(10px);
     cursor: pointer;
+}
+#navLogo:hover {
+    height: 71%;
+    transform: translate(9px);
 }
 #navContainer ul {
     display: flex;
-    height: 10vh;
+    height: 90px;
     min-height: 80px;
     margin: 0 auto 0 auto;
     padding: 0;
@@ -27,22 +33,27 @@
     justify-content: center;
 }
 #navContainer li {
-    display: block;
+    display: flex;
+    align-items: center;
     float: left;
     width: auto;
-    height: auto;
-    padding: 0 30px 0 30px;
+    height: 100%;
+    margin: 0 30px 0 30px;
+    border-bottom-style: solid;
+    border-bottom-color: black;
+    border-top-style: solid;
+    border-top-color: black;
 }
 #navContainer a {
+    padding: 10px 0 10px 0;
     font-family: AppleGothic, sans-serif;
     font-size: 25px;
     text-decoration: none;
     color: white;
     cursor: pointer;
-    /* border-bottom-style: solid;
-    border-color: white;
-    border-top-style: solid;
-    border-top-color: black; */
+}
+#navContainer a:hover {
+    font-weight: 600;
 }
 #cartIcon {
     position: absolute;
@@ -74,6 +85,10 @@
     align-self: center;
     font-family: AppleGothic, sans-serif;
     font-size: 31px;
+}
+#helpIcon:hover {
+    border-width: 4px;
+    font-weight: 600;
 }
 @media (max-width: 1100px) {
     #navContainer ul {
