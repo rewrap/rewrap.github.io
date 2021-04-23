@@ -13,8 +13,7 @@
     margin: 0 0 40px 0;
     flex-wrap: wrap;
     justify-content: flex-start;
-    align-items: baseline;
-    /* align-items: center; */
+    align-items: center;
 }
 #footerSocials h1 {
     margin: 0;
@@ -23,9 +22,21 @@
 }
 #footerSocials img {
     width: auto;
-    height: 60px;
-    padding: 0 0 0 50px;
+    height: 70px;
+    margin: 0 25px 0 25px;
 }
 #footerSocials img:hover {
     opacity: 0.75;
+}
+@media (max-width: 800px) {
+    #footerContainer {
+        background-size: 100vw;
+        padding: 20px 10px 0 10px;
+    }
+    #footerSocials {
+        justify-content: center;
+    }
+    #footerSocials h1 {
+        font-size: 60px;
+    }
 }
