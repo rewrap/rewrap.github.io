@@ -1,6 +1,6 @@
 #footerContainer {
     width: 100%;
-    min-height: 93vh;
+    min-height: 350px;
     padding: 7vw 7vw 0 7vw;
     background-image: url(ui_images/footer_background.png);
     background-size: 550px;
@@ -10,7 +10,6 @@
     display: flex;
     width: 100%;
     height: auto;
-    margin: 0 0 40px 0;
     flex-wrap: wrap;
     justify-content: flex-start;
     align-items: center;
@@ -25,13 +24,20 @@
     height: 70px;
     margin: 0 25px 0 25px;
 }
+#footerSocials a {
+    color: rgba(0, 0, 0, 0);
+}
 #footerSocials img:hover {
     opacity: 0.75;
+}
+#hiddenEmail {
+    opacity: 0%;
+    cursor: default;
 }
 @media (max-width: 800px) {
     #footerContainer {
         background-size: 100vw;
-        padding: 20px 10px 0 10px;
+        padding: 40px 10px 0 10px;
     }
     #footerSocials {
         justify-content: center;

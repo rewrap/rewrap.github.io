@@ -102,16 +102,19 @@
                 <a href="https://www.instagram.com/rewrap_nz/" target="_blank" rel="noreferrer noopener" title="@rewrap_nz">
                     <img src="ui_images/instagram_logo.svg" alt="Intagram Logo"></img>
                 </a>
-                <a href="mailto:rewrapvinyl@gmail.com" target="_blank" rel="noreferrer noopener" title="rewrapvinyl@gmail.com">
+                <a onclick="emailPrompt()" title="rewrapvinyl@gmail.com">
                     <img src="ui_images/mail_icon.svg" alt="Mail Icon"></img>
                 </a>
             </div>
+            <input type="text" value="rewrapvinyl@gmail.com" id="hiddenEmail">
         </div>
     </div>
 
     <!------------->
     <!-- Scripts -->
     <!------------->
+
+    <script type="text/javascript" src="global_functions.js"></script>
     
     <!-- Scroll to section -->
     <script>
