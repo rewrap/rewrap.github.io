@@ -115,7 +115,26 @@
     <!------------->
 
     <script type="text/javascript" src="global_functions.js"></script>
+
     
+    <!-- 2-stage animation for fading in then moving image -->
+    <script>
+        // Step 1: Fade in image when file loads
+        function fadeImage(element) {
+                element.classList.add("fadeIn");
+                console.log(element);
+                element.addEventListener("animationend", startScrolling);
+        }
+        // Step 2: Begin scrolling animation
+        function startScrolling() {
+            showcaseImg = document.getElementById("showcaseImg");
+            if(!showcaseImg.classList.contains("scrollImage")) {
+                showcaseImg.classList.add("scrollImage");
+            }
+        }
+    </script>
+    
+
     <!-- Scroll to section -->
     <script>
         function scrollToSection(targetSection) {
@@ -124,6 +143,7 @@
             item.scrollIntoView({behavior: "smooth", block: "end"});
         }
     </script>
+
 
     <!-- Change nav bar underline colour -->
     <script>
@@ -178,22 +198,6 @@
         }
     </script>
 
-    <!-- 2-stage animation for fading in then moving image -->
-    <script>
-        // Step 1: Fade in image when file loads
-        function fadeImage(element) {
-                element.classList.add("fadeIn");
-                console.log(element);
-                element.addEventListener("animationend", startScrolling);
-        }
-        // Step 2: Begin scrolling animation
-        function startScrolling() {
-            showcaseImg = document.getElementById("showcaseImg");
-            if(!showcaseImg.classList.contains("scrollImage")) {
-                showcaseImg.classList.add("scrollImage");
-            }
-        }
-    </script>
 
     <!-- Disable parallax on iOS -->
     <script>
