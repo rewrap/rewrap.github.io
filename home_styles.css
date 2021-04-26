@@ -7,19 +7,32 @@
     /* background-image: url("ui_images/showcase_gif50ms.gif"); */
     /* background-image: url("ui_images/tempshowcase.gif"); */
     /* background-image: url("https://cdn.discordapp.com/emojis/816165025675870258.gif?v=1"); */
-    background-size: auto 100%;
+    /* background-size: auto 100%; */
     overflow-x: hidden;
 }
 #showcaseBackground img {
     margin-left: 2vw;
     align-self: center;
     height: 70vh;
+}
+.fadeIn {
+    animation-name: fadeIn;
+    animation-duration: 0.3s;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+
+}
+@keyframes fadeIn {
+    0%{opacity: 0%;}
+    100%{opacity: 100%;}
+}
+.scrollImage {
     animation-name: scrollImage;
     animation-duration: 35s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     animation-direction: normal;
-
 }
 @keyframes scrollImage {
     0%{transform: translate(0);}
