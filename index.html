@@ -28,7 +28,7 @@
 
     <!-- Animated showcase div -->
     <div id="showcaseBackground">
-        <img onload="fadeImage(this)" id="showcaseImg" src="ui_images/scrolling_phones.png" alt="phone animation"></img>
+        <img onload="fadeImage(this)" id="showcaseImg" class="transparentIMG" src="ui_images/scrolling_phones.png" alt="phone animation"></img>
         <div id="showcaseText">
             <h1>ReWrap</h1>
             <p>slogan here?</p>
@@ -116,7 +116,7 @@
 
     <script type="text/javascript" src="global_functions.js"></script>
 
-    
+
     <!-- 2-stage animation for fading in then moving image -->
     <script>
         // Step 1: Fade in image when file loads
@@ -124,11 +124,13 @@
                 element.classList.add("fadeIn");
                 console.log(element);
                 element.addEventListener("animationend", startScrolling);
+                // startScrolling();
         }
         // Step 2: Begin scrolling animation
         function startScrolling() {
             showcaseImg = document.getElementById("showcaseImg");
             if(!showcaseImg.classList.contains("scrollImage")) {
+                showcaseImg.classList.remove("transparentIMG");
                 showcaseImg.classList.add("scrollImage");
             }
         }
