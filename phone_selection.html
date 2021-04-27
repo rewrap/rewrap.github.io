@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReWrap | Phone Selection</title>
+    <link rel="stylesheet" href="variables.css">
+    <link rel="stylesheet" href="nav_styles.css">
+    <link rel="stylesheet" href="phone_selection_styles.css">
+    <link rel="stylesheet" href="main_styles.css">
+    <link rel="stylesheet" href="footer_styles.css">
+    <link rel="shortcut icon" href="assets/site_icon.ico">
+</head>
+<body onload="loadStylesheet()">
+    <!-- Nav bar -->
+    <div id="navContainer">
+        <img id="navLogo" src="ui_images/nav_logo.svg" alt="ReWrap Logo" onclick="redirect('index.html')">
+        <ul>
+            <li id="whatnewLI"><a >What's New</a></li>
+            <li id="customLI"><a href="phone_selection.html?type=custom">Custom</a></li>
+            <li id="presetsLI"><a href="phone_selection.html?type=presets">Presets</a></li>
+            <li id="stickersLI"><a >Stickers</a></li>
+        </ul>
+        <div id="helpIcon"><p>?</p></div>
+    </div>
+
+    <!-- Phone selection container -->
+    <div id="phoneSelectionContainer">
+        
+    </div>
+    
+    <!-- Footer -->
+    <div id="footerContainer">
+        <div id="footerSocials">
+            <h1>Our Socials: </h1>
+            <div>
+                <a href="https://www.instagram.com/rewrap_nz/" target="_blank" rel="noreferrer noopener" title="@rewrap_nz">
+                    <img src="ui_images/instagram_logo.svg" alt="Intagram Logo">
+                </a>
+                <a onclick="emailPrompt()" title="rewrapvinyl@gmail.com">
+                    <img src="ui_images/mail_icon.svg" alt="Mail Icon">
+                </a>
+            </div>
+            <input type="text" value="rewrapvinyl@gmail.com" id="hiddenEmail">
+        </div>
+    </div>
+
+    <!--#########-->
+    <!-- Scripts -->
+    <!--#########-->
+
+    <script type="text/javascript" src="global_functions.js"></script>
+
+    <script>
+        function loadStylesheet() {
+            console.log("begun");
+            const params = new URLSearchParams(window.location.search);
+            if(params.has("type")) {
+                if(params.get("type") == "custom") {
+                    document.getElementsByTagName("head")[0].insertAdjacentHTML(
+                        "beforeend",
+                        "<link rel=\"stylesheet\" href=\"custom_wraps_styles.css\" />");
+                } else if(params.get("type") == "presets") {
+                    document.getElementsByTagName("head")[0].insertAdjacentHTML(
+                        "beforeend",
+                        "<link rel=\"stylesheet\" href=\"preset_wraps_styles.css\" />");
+                }
+            }
+        }
+    </script>
+</body>
+</html>

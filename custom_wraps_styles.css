@@ -1,0 +1,7 @@
+#customLI {
+    border-bottom-color: var(--specialGreen);
+}
+#customLI a {
+    font-weight: 600;
+    color: var(--specialGreen);
+}

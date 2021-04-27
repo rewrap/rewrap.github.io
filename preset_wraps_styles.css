@@ -1,0 +1,7 @@
+#presetsLI {
+    border-bottom-color: var(--specialGreen);
+}
+#presetsLI a {
+    font-weight: 600;
+    color: var(--specialGreen);
+}

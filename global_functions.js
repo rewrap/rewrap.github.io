@@ -1,3 +1,7 @@
+function redirect(href) {
+    window.open(href, "_self")
+}
+
 function emailPrompt() {
     var copyText = document.getElementById("hiddenEmail");
     copyText.select();

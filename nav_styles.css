@@ -5,7 +5,7 @@
     top:0;
     width: 100%;
     min-height: 90px;
-    background-color: #1A1A1A;
+    background-color: var(--specialBlack);
     align-items: center;
     overflow-x: hidden;
     overflow-y: hidden;
@@ -40,10 +40,9 @@
     width: auto;
     height: 100%;
     margin: 0 30px 0 30px;
+    color: var(--specialBlack);
     border-bottom-style: solid;
-    border-bottom-color: #1A1A1A;
     border-top-style: solid;
-    border-top-color: #1A1A1A;
 }
 #navContainer a {
     padding: 10px 0 10px 0;
