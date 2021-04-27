@@ -113,7 +113,7 @@
     <!-- Scripts -->
     <!--#########-->
 
-    <script src="global_functions.js"></script>
+    <script type="text/javascript" src="global_functions.js"></script>
 
 
     <!-- 2-stage animation for fading in then moving image -->
@@ -150,7 +150,6 @@
     <script>
         function scrollToSection(targetSection) {
             item = document.getElementById(targetSection);
-            console.log(item);
             item.scrollIntoView({behavior: "smooth", block: "end"});
         }
     </script>
@@ -216,12 +215,11 @@
         var parallaxWindows = document.getElementsByClassName("parallaxWindow");
 
         if (isIOS) {
-            console.log('This is a IOS device');
             for (item of parallaxWindows) {
                 item.style.backgroundAttachment = "scroll";
             }
         } else {
-            console.log('This is Not a IOS device :}');
+            // Do nothing
         }
     </script>
 </body>
