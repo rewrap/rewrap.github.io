@@ -18,7 +18,7 @@
         <img id="navLogo" src="ui_images/nav_logo.svg" alt="ReWrap Logo" onmousedown="redirect('index.html', event)">
         <ul>
             <li id="whatnewLI"><a href="new.html">What's New</a></li>
-            <li id="customLI"><a>Custom</a></li>
+            <li id="customLI"><a href="phone_selection.html?type=custom">Custom</a></li>
             <li id="presetsLI"><a href="phone_selection.html?type=presets">Presets</a></li>
             <li id="stickersLI"><a href="stickers.html">Stickers</a></li>
         </ul>
@@ -27,17 +27,41 @@
 
     <!-- Sub-Nav -->
     <div id="subNav">
-        <span id="subNavHeading">Custom >>&#160</span>
+        <span id="subNavHeading">>>&#160</span>
         <span id="returnToSelection" onmousedown="redirect('phone_selection.html?type=custom', event)">Phone selection</span>
         <span>&#160>>&#160</span>
-        <span id="subNavModel"></span>
-        <span>&#160>>&#160</span>
-        <span>Upload image</span>
+        <span>Upload and position image</span>
     </div>
 
     <!-- Custom wrap interface -->
     <div id="customWrapContainer">
+        <div id="phoneBackContainer">
+            <h1 id="selectedPhoneName"></h1>
+            <div id="customImageDiv">
+                <img id="selectedPhoneMask">
+            </div>
+            <p>[Wrap Preview]</p>
+        </div>
+        <div id="selectorUIContainer">
+            <!-- Child 1: Step one instructions + Clear -->
+            <div>
+                <span class="number">1.</span>
+                <span class="heading">Upload or link your image</span>
+                <img id="deleteButton" onclick="resetImage()" src="ui_images/bin_icon.svg" alt="Clear Button" title="Reset Image">
+            </div>
+            <!-- Child 2: Upload image box -->
+            <div>
+                <img id="uploadButton" src="ui_images/cloud_icon.svg" title="Upload Image">
+                <input type="text" value="Click icon to upload file [currently unavailable]" readonly>
+            </div>
+            <!-- Child 3: Link image box -->
+            <div>
+                <img id="linkButton" onclick="pasteLink()" src="ui_images/link_icon.svg" title="Paste Link">
+                <input id="linkBox" type="text" value="Click icon to paste link"
+                    onpaste="updateImage(this)" onchange="updateImage(this)" oninput="updateImage(this)">
+            </div>
 
+        </div>
     </div>
 
     <!-- Sub-Footer -->
@@ -57,13 +81,83 @@
                     <img src="ui_images/mail_icon.svg" alt="Mail Icon">
                 </a>
             </div>
-            <input type="text" value="rewrapvinyl@gmail.com" id="hiddenEmail">
+            <input type="text" value="rewrapvinyl@gmail.com" id="hiddenEmail" readonly>
         </div>
     </div>
 
     <!--#########-->
     <!-- Scripts -->
     <!--#########-->
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-analytics.js"></script>
+
+    <script>
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    var firebaseConfig = {
+        apiKey: "AIzaSyCVFVGnuER8SzjpRnYFba_dOzzQRG_kwnw",
+        authDomain: "rewrap-website.firebaseapp.com",
+        projectId: "rewrap-website",
+        storageBucket: "rewrap-website.appspot.com",
+        messagingSenderId: "615977953801",
+        appId: "1:615977953801:web:02d4ac995c7a4b1cc426d8",
+        measurementId: "G-PFB53Q7DJW"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+    </script>
+
+    <!-- Update image -->
+    <script>
+        function updateImage(element) {
+            image = document.getElementById("customImageDiv");
+            if(element.id == "linkBox") {
+                var value = document.getElementById("linkBox").value;
+                var url = "url("+value+")"
+                console.log(url);
+                image.style.backgroundImage = url;
+            }
+        }
+    </script>
+
+
+    <!-- Reset image -->
+    <script>
+        function resetImage() {
+            // Reset image on wrap
+            var image = document.getElementById("customImageDiv");
+            image.style.backgroundImage = "url()";
+
+            // Reset link field
+            var linkBox = document.getElementById("linkBox");
+            linkBox.value = "Click icon to paste link";
+        }
+    </script>
+
+
+    <!-- Paste link -->
+    <script>
+        function pasteLink() {
+            var linkBox = document.getElementById("linkBox");
+            linkBox.select();
+            linkBox.setAttribute("value", "");
+            navigator.clipboard.readText()
+            .then(text => {
+                linkBox.value = text;
+                updateImage(linkBox);
+            })
+            .catch(err => {
+                console.error('Failed to read clipboard contents: ', err);
+            });
+        }
+    </script>
+
 
     <!-- Set phone model in sub-nav -->
     <script src="apple_phones.js"></script> <!-- Apple phones array -->
@@ -72,12 +166,14 @@
     <script>
         const params = new URLSearchParams(window.location.search);
         var modelFound = false;
-        var element = document.getElementById("subNavModel");
+        var phoneTitle = document.getElementById("selectedPhoneName");
+        var phoneMask = document.getElementById("selectedPhoneMask");
         if(params.has("phone")) {
             for(item of apple_phones) {
                 if(!modelFound) {
                     if(item.id == params.get("phone")) {
-                        element.innerHTML = item.name;
+                        phoneTitle.innerHTML = item.name;
+                        phoneMask.setAttribute("src", "phone_outlines/ip_temp.png");
                         modelFound = true;
                     }
                 } else {
@@ -87,7 +183,8 @@
             for(item of samsung_phones) {
                 if(!modelFound) {
                     if(item.id == params.get("phone")) {
-                        element.innerHTML = item.name;
+                        phoneTitle.innerHTML = item.name;
+                        phoneMask.setAttribute("src", "phone_outlines/s_temp.png");
                         modelFound = true;
                     }
                 } else {

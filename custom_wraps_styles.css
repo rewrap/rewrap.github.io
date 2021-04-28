@@ -4,9 +4,90 @@
 #customLI a {
     font-weight: 600;
     color: var(--specialGreen);
-    cursor: default;
 }
 #customWrapContainer {
-    height: 800px;
+    display: flex;
+    height: auto;
+    padding: 40px 0 100px 0;
+    flex-wrap: wrap;
+    justify-content: space-around;
     background-color: var(--specialGrey);
+}
+#phoneBackContainer {
+    display: flex;
+    width: 350px;
+    height: 800px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+#phoneBackContainer p {
+    color: white;
+}
+#selectedPhoneName {
+    margin: 0 0 20px 0;
+    color: white;
+    font-size: 35px;
+}
+#customImageDiv {
+    width: 90%;
+    max-height: 800px;
+    background-color: white;
+    background-position: 50% 50%;
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+}
+#selectedPhoneMask {
+    display: block;
+    width: 100%;
+}
+#selectorUIContainer {
+    width: 800px;
+    height: 800px;
+    padding: 20px;
+    border-radius: 35px;
+    background-color: white;
+}
+#selectorUIContainer .number {
+    font-size: 45px;
+    color: #14B495;
+}
+#selectorUIContainer .heading {
+    margin-left: 10px;
+    font-size: 30px;
+}
+
+/* Child 1 */
+#selectorUIContainer > :nth-child(1) {
+    height: 70px;
+}
+#deleteButton {
+    float: right;
+    width: 35px;
+    cursor: pointer;
+}
+#deleteButton:hover {
+    opacity: 80%;
+}
+
+/* Children 2 and 3 */
+#selectorUIContainer > :nth-child(2), #selectorUIContainer > :nth-child(3) {
+    display: flex;
+    padding: 10px;
+    justify-content: flex-start;
+    align-items: center;
+}
+#uploadButton, #linkButton {
+    height: 55px;
+    margin-right: 15px;
+    cursor: pointer;
+}
+#uploadButton:hover, #linkButton:hover {
+    opacity: 80%;
+}
+#selectorUIContainer > :nth-child(2) > input, #selectorUIContainer > :nth-child(3) > input {
+    height: 30px;
+    width: 500px;
+    font-size: 15px;
+    cursor: default;
 }

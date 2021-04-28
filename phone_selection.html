@@ -27,7 +27,7 @@
 
     <!-- Sub-Nav -->
     <div id="subNav">
-        <span id="subNavHeading"></span><span>Phone selection</span>
+        <span id="subNavHeading">>>&#160</span><span>Phone selection</span>
     </div>
 
     <!-- Phone selection container -->
@@ -60,7 +60,7 @@
                     <img src="ui_images/mail_icon.svg" alt="Mail Icon">
                 </a>
             </div>
-            <input type="text" value="rewrapvinyl@gmail.com" id="hiddenEmail">
+            <input type="text" value="rewrapvinyl@gmail.com" id="hiddenEmail" readonly>
         </div>
     </div>
 
@@ -77,13 +77,11 @@
                     document.getElementsByTagName("head")[0].insertAdjacentHTML(
                         "beforeend",
                         "<link rel=\"stylesheet\" href=\"custom_wraps_styles.css\" />");
-                    document.getElementById("subNavHeading").innerHTML = "Custom >>&#160";
                     document.getElementById("customLI").firstChild.setAttribute("href", "javascript:void(0)");
                 } else if(params.get("type") == "presets") {
                     document.getElementsByTagName("head")[0].insertAdjacentHTML(
                         "beforeend",
                         "<link rel=\"stylesheet\" href=\"preset_wraps_styles.css\" />");
-                    document.getElementById("subNavHeading").innerHTML = "Presets >>&#160";
                     document.getElementById("presetsLI").firstChild.setAttribute("href", "javascript:void(0)");
                 } else {
                     redirect("phone_selection.html?type=custom");
