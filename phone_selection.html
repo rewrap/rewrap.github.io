@@ -15,20 +15,22 @@
 <body onload="loadStylesheet()">
     <!-- Nav bar -->
     <div id="navContainer">
-        <img id="navLogo" src="ui_images/nav_logo.svg" alt="ReWrap Logo" onclick="redirect('index.html')">
+        <img id="navLogo" src="ui_images/nav_logo.svg" alt="ReWrap Logo" onmousedown="redirect('index.html', event)">
         <ul>
-            <li id="whatnewLI"><a >What's New</a></li>
+            <li id="whatnewLI"><a href="new.html">What's New</a></li>
             <li id="customLI"><a href="phone_selection.html?type=custom">Custom</a></li>
             <li id="presetsLI"><a href="phone_selection.html?type=presets">Presets</a></li>
-            <li id="stickersLI"><a >Stickers</a></li>
+            <li id="stickersLI"><a href="stickers.html">Stickers</a></li>
         </ul>
-        <div id="helpIcon"><p>?</p></div>
+        <div id="helpIcon" onmousedown="redirect('help.html', event)"><p>?</p></div>
     </div>
 
-    <!-- Phone selection container -->
+    <!-- Sub-Nav -->
     <div id="subNav">
         <span id="subNavHeading"></span><span>Phone selection</span>
     </div>
+
+    <!-- Phone selection container -->
     <div id="phoneSelectionContainer">
         <h1>Apple</h1>
         <div id="applePhonesContainer" class="phoneImageContainer">
@@ -40,6 +42,8 @@
         </div>
     </div>
     
+
+    <!-- Sub-Footer -->
     <div id="subFooter">
         <span onclick="backToTop()">Back to top ▲</span>
     </div>
@@ -131,7 +135,7 @@
             var a = document.createElement("a");
             // Set link url
             var href = redirectUrl+item.id;
-            a.setAttribute("href", href)
+            a.setAttribute("href", href);
             // Append div to link
             a.appendChild(div);
             
@@ -164,20 +168,12 @@
             var a = document.createElement("a");
             // Set link url
             var href = redirectUrl+item.id;
-            a.setAttribute("href", href)
+            a.setAttribute("href", href);
             // Append div to link
             a.appendChild(div);
             
             // Append complete div to website
             document.getElementById("samsungPhonesContainer").appendChild(a);
-        }
-    </script>
-
-
-    <!-- Back to top -->
-    <script>
-        function backToTop() {
-            document.getElementById("subNav").scrollIntoView({behavior: "smooth", block: "end"});
         }
     </script>
 

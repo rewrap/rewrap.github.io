@@ -1,5 +1,13 @@
-function redirect(href) {
-    window.open(href, "_self")
+function redirect(href, event) {
+    if (event && (event.which == 2 || event.button == 4)) {
+        window.open(href, "__blank");
+    } else {
+        window.open(href, "_self");
+    }
+}
+
+function backToTop() {
+    document.getElementById("subNav").scrollIntoView({ behavior: "smooth", block: "end" });
 }
 
 function emailPrompt() {

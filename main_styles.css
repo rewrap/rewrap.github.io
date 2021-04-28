@@ -42,3 +42,29 @@ span {
     width: 100%;
     height: 200vh;
 }
+#subNav {
+    display: flex;
+    padding: 10px;
+    align-items: center;
+}
+#subNavHeading {
+    font-family: Timeburner;
+    font-size: 28px;
+}
+#subNav #returnToSelection {
+    cursor: pointer;
+}
+#subNav #returnToSelection:hover {
+    font-weight: 600;
+}
+#subFooter {
+    padding: 10px;
+}
+#subFooter span {
+    font-family: Timeburner;
+    font-size: 28px;
+    cursor: pointer;
+}
+#subFooter span:hover {
+    font-weight: 600;
+}

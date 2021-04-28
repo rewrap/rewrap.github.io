@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReWrap | Phone Selection</title>
+    <link rel="stylesheet" href="variables.css">
+    <link rel="stylesheet" href="nav_styles.css">
+    <link rel="stylesheet" href="custom_wraps_styles.css">
+    <link rel="stylesheet" href="main_styles.css">
+    <link rel="stylesheet" href="footer_styles.css">
+    <link rel="shortcut icon" href="assets/site_icon.ico">
+</head>
+<body>
+    <!-- Nav bar -->
+    <div id="navContainer">
+        <img id="navLogo" src="ui_images/nav_logo.svg" alt="ReWrap Logo" onmousedown="redirect('index.html', event)">
+        <ul>
+            <li id="whatnewLI"><a href="new.html">What's New</a></li>
+            <li id="customLI"><a>Custom</a></li>
+            <li id="presetsLI"><a href="phone_selection.html?type=presets">Presets</a></li>
+            <li id="stickersLI"><a href="stickers.html">Stickers</a></li>
+        </ul>
+        <div id="helpIcon" onmousedown="redirect('help.html', event)"><p>?</p></div>
+    </div>
+
+    <!-- Sub-Nav -->
+    <div id="subNav">
+        <span id="subNavHeading">Custom >>&#160</span>
+        <span id="returnToSelection" onmousedown="redirect('phone_selection.html?type=custom', event)">Phone selection</span>
+        <span>&#160>>&#160</span>
+        <span id="subNavModel"></span>
+        <span>&#160>>&#160</span>
+        <span>Upload image</span>
+    </div>
+
+    <!-- Custom wrap interface -->
+    <div id="customWrapContainer">
+
+    </div>
+
+    <!-- Sub-Footer -->
+    <div id="subFooter">
+        <span onclick="backToTop()">Back to top ▲</span>
+    </div>
+
+    <!-- Footer -->
+    <div id="footerContainer">
+        <div id="footerSocials">
+            <h1>Our Socials: </h1>
+            <div>
+                <a href="https://www.instagram.com/rewrap_nz/" target="_blank" rel="noreferrer noopener" title="@rewrap_nz">
+                    <img src="ui_images/instagram_logo.svg" alt="Intagram Logo">
+                </a>
+                <a onclick="emailPrompt()" title="rewrapvinyl@gmail.com">
+                    <img src="ui_images/mail_icon.svg" alt="Mail Icon">
+                </a>
+            </div>
+            <input type="text" value="rewrapvinyl@gmail.com" id="hiddenEmail">
+        </div>
+    </div>
+
+    <!--#########-->
+    <!-- Scripts -->
+    <!--#########-->
+
+    <!-- Set phone model in sub-nav -->
+    <script src="apple_phones.js"></script> <!-- Apple phones array -->
+    <script src="samsung_phones.js"></script> <!-- Samsung phones array -->
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        var modelFound = false;
+        var element = document.getElementById("subNavModel");
+        if(params.has("phone")) {
+            for(item of apple_phones) {
+                if(!modelFound) {
+                    if(item.id == params.get("phone")) {
+                        element.innerHTML = item.name;
+                        modelFound = true;
+                    }
+                } else {
+                    break;
+                }
+            }
+            for(item of samsung_phones) {
+                if(!modelFound) {
+                    if(item.id == params.get("phone")) {
+                        element.innerHTML = item.name;
+                        modelFound = true;
+                    }
+                } else {
+                    break;
+                }
+            }
+        }
+    </script>
+
+    <script src="global_functions.js"></script>
+</body>
+</html>

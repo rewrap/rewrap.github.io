@@ -1,18 +1,9 @@
-#subNav {
-    display: flex;
-    padding: 10px;
-    align-items: center;
-}
-#subNavHeading {
-    font-family: Timeburner;
-    font-size: 28px;
-}
 #phoneSelectionContainer {
     display: flex;
     height: auto;
     padding: 0 60px 40px 60px;
     flex-direction: column;
-    background-color: #353535;
+    background-color: var(--specialGrey);
 }
 #phoneSelectionContainer h1 {
     margin: 40px 0 20px 10px;
@@ -61,17 +52,5 @@
     box-shadow: 0 0 10px var(--specialGreen);
 }
 .phoneImageContainer div:hover span {
-    font-weight: 600;
-}
-
-#subFooter {
-    padding: 10px;
-}
-#subFooter span {
-    font-family: Timeburner;
-    font-size: 28px;
-    cursor: pointer;
-}
-#subFooter span:hover {
     font-weight: 600;
 }

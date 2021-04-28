@@ -6,3 +6,7 @@
     color: var(--specialGreen);
     cursor: default;
 }
+#customWrapContainer {
+    height: 800px;
+    background-color: var(--specialGrey);
+}

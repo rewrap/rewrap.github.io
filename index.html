@@ -22,7 +22,7 @@
             <li id="presetsLI"><a onclick="scrollToSection('presetsBox')">Presets</a></li>
             <li id="stickersLI"><a onclick="scrollToSection('stickersBox')">Stickers</a></li>
         </ul>
-        <div id="helpIcon"><p>?</p></div>
+        <div id="helpIcon" onmousedown="redirect('help.html', event)"><p>?</p></div>
     </div>
 
     <!-- Animated showcase div -->
@@ -64,7 +64,7 @@
         <div class="textDiv">
             <h2 id="whatnewText">What's new</h2>
             <p>Some wacky text here describing the product</p>
-            <div><a>SHOP HERE</a></div>
+            <div><a href="new.html">LEARN MORE</a></div>
         </div>
         <div id="imgDiv1" class="imgDiv parallaxWindow"></div>
     </div>
@@ -89,7 +89,7 @@
         <div class="textDiv">
             <h2 id="stickersText">Stickers</h2>
             <p>Some wacky text here describing the product</p>
-            <div><a>SHOP HERE</a></div>
+            <div><a href="stickers.html">SHOP HERE</a></div>
         </div>
     </div>
 
@@ -179,21 +179,21 @@
                 changeStyle(li, false);
             }
 
-            li = document.getElementById("customLI")
+            li = document.getElementById("customLI");
             if(isInViewport(document.getElementById("customText"))) {
                 changeStyle(li, true);
             } else {
                 changeStyle(li, false);
             }
 
-            li = document.getElementById("presetsLI")
+            li = document.getElementById("presetsLI");
             if(isInViewport(document.getElementById("presetsText"))) {
                 changeStyle(li, true);
             } else {
                 changeStyle(li, false);
             }
 
-            li = document.getElementById("stickersLI")
+            li = document.getElementById("stickersLI");
             if(isInViewport(document.getElementById("stickersText"))) {
                 changeStyle(li, true);
             } else {
