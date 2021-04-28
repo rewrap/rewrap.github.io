@@ -94,9 +94,9 @@
         var redirectUrl;
         if(params.has("type")) {
             if(params.get("type") == "custom") {
-                redirectUrl = "onClick=redirect('custom_wraps.html?phone=";
+                redirectUrl = "custom_wraps.html?phone=";
             } else if(params.get("type") == "presets") {
-                redirectUrl = "onClick=redirect('preset_wraps.html?phone=";
+                redirectUrl = "preset_wraps.html?phone=";
             }
         }
 
@@ -104,10 +104,7 @@
         for(item of apple_phones) {
             // Create div element (container for phone item)
             var div = document.createElement("div");
-            // Create redirect function and add it to the div
-            var clickFunction = redirectUrl+item.id+"')";
-            div.setAttribute("onClick", clickFunction);
-
+            
             // Create image element (phone SVG)
             var img = document.createElement("img");
             // Set the image source and alt
@@ -116,7 +113,7 @@
             img.setAttribute("alt", item.name);
             // Append image to div
             div.appendChild(img);
-
+            
             // Create span element (phone name)
             var span = document.createElement("span");
             // Set span text
@@ -124,18 +121,23 @@
             // Append text to div
             div.appendChild(span);
             
+            // Create link element
+            var a = document.createElement("a");
+            // Set link url
+            var href = redirectUrl+item.id;
+            a.setAttribute("href", href)
+            // Append div to link
+            a.appendChild(div);
+            
             // Append complete div to website
-            document.getElementById("applePhonesContainer").appendChild(div);
+            document.getElementById("applePhonesContainer").appendChild(a);
         }
 
         // Create items for Samsung phones
         for(item of samsung_phones) {
             // Create div element (container for phone item)
             var div = document.createElement("div");
-            // Create redirect function and add it to the div
-            var clickFunction = redirectUrl+item.id+"')";
-            div.setAttribute("onClick", clickFunction);
-
+            
             // Create image element (phone SVG)
             var img = document.createElement("img");
             // Set the image source and alt
@@ -144,7 +146,7 @@
             img.setAttribute("alt", item.name);
             // Append image to div
             div.appendChild(img);
-
+            
             // Create span element (phone name)
             var span = document.createElement("span");
             // Set span text
@@ -152,8 +154,16 @@
             // Append text to div
             div.appendChild(span);
             
+            // Create link element
+            var a = document.createElement("a");
+            // Set link url
+            var href = redirectUrl+item.id;
+            a.setAttribute("href", href)
+            // Append div to link
+            a.appendChild(div);
+            
             // Append complete div to website
-            document.getElementById("samsungPhonesContainer").appendChild(div);
+            document.getElementById("samsungPhonesContainer").appendChild(a);
         }
     </script>
 

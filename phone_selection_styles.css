@@ -30,6 +30,7 @@
 .phoneImageContainer div {
     display: flex;
     width: 300px;
+    min-height: 400px;
     margin: 0 -21px 40px -21px;
     padding: 42px 42px 42px 42px;
     flex-direction: column;
@@ -37,7 +38,12 @@
     justify-content: center;
     border-radius: 20px;
     background-color: var(--specialBlack);
+    overflow-y: hidden;
+    overflow-x: hidden;
     cursor: pointer;
+}
+.phoneImageContainer a {
+    text-decoration: none;
 }
 .phoneImageContainer img {
     border-radius: 15px;
@@ -49,6 +55,7 @@
     color: white;
     font-size: 28px;
     cursor: pointer;
+    white-space: nowrap;
 }
 .phoneImageContainer div:hover img {
     box-shadow: 0 0 10px var(--specialGreen);
