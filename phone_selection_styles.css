@@ -1,0 +1,70 @@
+#subNav {
+    display: flex;
+    padding: 10px;
+    align-items: center;
+}
+#subNavHeading {
+    font-family: Timeburner;
+    font-size: 28px;
+}
+#phoneSelectionContainer {
+    display: flex;
+    height: auto;
+    padding: 0 60px 40px 60px;
+    flex-direction: column;
+    background-color: #353535;
+}
+#phoneSelectionContainer h1 {
+    margin: 40px 0 20px 10px;
+    width: 100%;
+    font-size: 50px;
+    color: white;
+}
+.phoneImageContainer {
+    display: flex;
+    width: auto;
+    height: auto;
+    padding: 0 20px 0 20px;
+    flex-wrap: wrap;
+}
+.phoneImageContainer div {
+    display: flex;
+    width: 300px;
+    margin: 0 -21px 40px -21px;
+    padding: 42px 42px 42px 42px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    background-color: var(--specialBlack);
+    cursor: pointer;
+}
+.phoneImageContainer img {
+    border-radius: 15px;
+    width: 120px;
+}
+.phoneImageContainer span {
+    font-family: AppleGothicNeo;
+    margin-top: 20px;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+}
+.phoneImageContainer div:hover img {
+    box-shadow: 0 0 10px var(--specialGreen);
+}
+.phoneImageContainer div:hover span {
+    font-weight: 600;
+}
+
+#subFooter {
+    padding: 10px;
+}
+#subFooter span {
+    font-family: Timeburner;
+    font-size: 28px;
+    cursor: pointer;
+}
+#subFooter span:hover {
+    font-weight: 600;
+}

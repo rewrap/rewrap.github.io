@@ -12,6 +12,14 @@
         url(assets/timeburner/timeburner.ttf) format("ttf"),
         url(assets/timeburner/timeburner.svg) format("svg");
 }
+@font-face {
+    font-family: AppleGothicNeo;
+    src:url(assets/applegothicneo/AppleSDGothicNeoL00.eot);
+    src:url(assets/applegothicneo/AppleSDGothicNeoL00.eot?#iefix) format('embedded-opentype'),
+        url(assets/applegothicneo/AppleSDGothicNeoL00.woff2) format('woff2'),
+        url(assets/applegothicneo/AppleSDGothicNeoL00.woff) format('woff'),
+        url(assets/applegothicneo/AppleSDGothicNeoL00.svg#AppleSDGothicNeoL00) format('svg');
+}
 
 * {
     box-sizing: border-box;
@@ -26,6 +34,9 @@ h1 {
 }
 p {
     font-family: AppleGothic, sans-serif;
+}
+span {
+    cursor: default;
 }
 #bodyDiv {
     width: 100%;

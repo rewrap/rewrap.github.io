@@ -26,10 +26,24 @@
     </div>
 
     <!-- Phone selection container -->
+    <div id="subNav">
+        <span id="subNavHeading"></span><span>Phone selection</span>
+    </div>
     <div id="phoneSelectionContainer">
-        
+        <h1>Apple</h1>
+        <div id="applePhonesContainer" class="phoneImageContainer">
+            <!-- Items automatically inserted by script -->
+        </div>
+        <h1>Samsung</h1>
+        <div id="samsungPhonesContainer" class="phoneImageContainer">
+            <!-- Items automatically inserted by script -->
+        </div>
     </div>
     
+    <div id="subFooter">
+        <span onclick="backToTop()">Back to top ▲</span>
+    </div>
+
     <!-- Footer -->
     <div id="footerContainer">
         <div id="footerSocials">
@@ -50,6 +64,7 @@
     <!-- Scripts -->
     <!--#########-->
 
+    <!-- Load nav stylesheet -->
     <script>
         function loadStylesheet() {
             const params = new URLSearchParams(window.location.search);
@@ -58,12 +73,95 @@
                     document.getElementsByTagName("head")[0].insertAdjacentHTML(
                         "beforeend",
                         "<link rel=\"stylesheet\" href=\"custom_wraps_styles.css\" />");
+                    document.getElementById("subNavHeading").innerHTML = "Custom >>&#160";
                 } else if(params.get("type") == "presets") {
                     document.getElementsByTagName("head")[0].insertAdjacentHTML(
                         "beforeend",
                         "<link rel=\"stylesheet\" href=\"preset_wraps_styles.css\" />");
+                    document.getElementById("subNavHeading").innerHTML = "Presets >>&#160";
                 }
             }
+        }
+    </script>
+
+
+    <!-- Dynamically add phones to page -->
+    <script src="apple_phones.js">// Apple phones array</script>
+    <script src="samsung_phones.js">// Samsung phones array</script>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        var redirectUrl;
+        if(params.has("type")) {
+            if(params.get("type") == "custom") {
+                redirectUrl = "onClick=redirect('custom_wraps.html?phone=";
+            } else if(params.get("type") == "presets") {
+                redirectUrl = "onClick=redirect('preset_wraps.html?phone=";
+            }
+        }
+
+        // Create items for Apple phones
+        for(item of apple_phones) {
+            // Create div element (container for phone item)
+            var div = document.createElement("div");
+            // Create redirect function and add it to the div
+            var clickFunction = redirectUrl+item.id+"')";
+            div.setAttribute("onClick", clickFunction);
+
+            // Create image element (phone SVG)
+            var img = document.createElement("img");
+            // Set the image source and alt
+            var src = "phone_vectors/"+item.id+".svg";
+            img.setAttribute("src", src);
+            img.setAttribute("alt", item.name);
+            // Append image to div
+            div.appendChild(img);
+
+            // Create span element (phone name)
+            var span = document.createElement("span");
+            // Set span text
+            span.innerHTML = item.name;
+            // Append text to div
+            div.appendChild(span);
+            
+            // Append complete div to website
+            document.getElementById("applePhonesContainer").appendChild(div);
+        }
+
+        // Create items for Samsung phones
+        for(item of samsung_phones) {
+            // Create div element (container for phone item)
+            var div = document.createElement("div");
+            // Create redirect function and add it to the div
+            var clickFunction = redirectUrl+item.id+"')";
+            div.setAttribute("onClick", clickFunction);
+
+            // Create image element (phone SVG)
+            var img = document.createElement("img");
+            // Set the image source and alt
+            var src = "phone_vectors/"+item.id+".svg";
+            img.setAttribute("src", src);
+            img.setAttribute("alt", item.name);
+            // Append image to div
+            div.appendChild(img);
+
+            // Create span element (phone name)
+            var span = document.createElement("span");
+            // Set span text
+            span.innerHTML = item.name;
+            // Append text to div
+            div.appendChild(span);
+            
+            // Append complete div to website
+            document.getElementById("samsungPhonesContainer").appendChild(div);
+        }
+    </script>
+
+
+    <!-- Back to top -->
+    <script>
+        function backToTop() {
+            document.getElementById("subNav").scrollIntoView({behavior: "smooth", block: "end"});
         }
     </script>
 

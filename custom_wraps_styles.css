@@ -4,4 +4,5 @@
 #customLI a {
     font-weight: 600;
     color: var(--specialGreen);
+    cursor: default;
 }

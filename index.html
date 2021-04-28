@@ -156,41 +156,48 @@
     <script>
         document.addEventListener("scroll", changeUnderlines);
 
+        function changeStyle(element, setSpecial) {
+            if(setSpecial) {
+                element.style.borderBottomColor = "var(--specialGreen)";
+                element.firstChild.style.color = "var(--specialGreen)";
+                element.firstChild.style.fontWeight = "600";
+                element.firstChild.style.cursor = "default";
+            } else {
+                element.style.borderBottomColor = "#1A1A1A";
+                element.firstChild.style.color = "white";
+                element.firstChild.style.fontWeight = "500";
+                element.firstChild.style.cursor = "pointer";
+            }
+
+        }
+
         function changeUnderlines() {
             var li = document.getElementById("whatnewLI");
             if(isInViewport(document.getElementById("whatnewText"))) {
-                li.style.borderBottomColor = "var(--specialGreen)";
-                li.firstChild.style.color = "var(--specialGreen)";
+                changeStyle(li, true);
             } else {
-                li.style.borderBottomColor = "#1A1A1A";
-                li.firstChild.style.color = "white";
+                changeStyle(li, false);
             }
 
             li = document.getElementById("customLI")
             if(isInViewport(document.getElementById("customText"))) {
-                li.style.borderBottomColor = "var(--specialGreen)";
-                li.firstChild.style.color = "var(--specialGreen)";
+                changeStyle(li, true);
             } else {
-                li.style.borderBottomColor = "#1A1A1A";
-                li.firstChild.style.color = "white";
+                changeStyle(li, false);
             }
 
             li = document.getElementById("presetsLI")
             if(isInViewport(document.getElementById("presetsText"))) {
-                li.style.borderBottomColor = "var(--specialGreen)";
-                li.firstChild.style.color = "var(--specialGreen)";
+                changeStyle(li, true);
             } else {
-                li.style.borderBottomColor = "#1A1A1A";
-                li.firstChild.style.color = "white";
+                changeStyle(li, false);
             }
 
             li = document.getElementById("stickersLI")
             if(isInViewport(document.getElementById("stickersText"))) {
-                li.style.borderBottomColor = "var(--specialGreen)";
-                li.firstChild.style.color = "var(--specialGreen)";
+                changeStyle(li, true);
             } else {
-                li.style.borderBottomColor = "#1A1A1A";
-                li.firstChild.style.color = "white";
+                changeStyle(li, false);
             }
         }
 
