@@ -79,7 +79,11 @@
                         "beforeend",
                         "<link rel=\"stylesheet\" href=\"preset_wraps_styles.css\" />");
                     document.getElementById("subNavHeading").innerHTML = "Presets >>&#160";
+                } else {
+                    redirect("phone_selection.html?type=custom");
                 }
+            } else {
+                redirect("phone_selection.html?type=custom");
             }
         }
     </script>

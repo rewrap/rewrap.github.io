@@ -30,7 +30,7 @@
 .phoneImageContainer div {
     display: flex;
     width: 300px;
-    min-height: 400px;
+    height: 410px;
     margin: 0 -21px 40px -21px;
     padding: 42px 42px 42px 42px;
     flex-direction: column;
