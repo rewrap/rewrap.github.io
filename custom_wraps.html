@@ -43,11 +43,12 @@
             <p>[Wrap Preview]</p>
         </div>
         <div id="selectorUIContainer">
-            <!-- Child 1: Step one instructions + Clear -->
+            <!-- Child 1: Step one instructions + Dark slider + Clear -->
             <div>
                 <span class="number">1.</span>
                 <span class="heading">Upload or link your image</span>
                 <img id="deleteButton" onclick="resetImage()" src="ui_images/bin_icon.svg" alt="Clear Button" title="Reset Image">
+                <input id="brightnessSlider" type="range" min="0" max="10" value="5">
             </div>
             <!-- Child 2: Upload image box -->
             <div>
@@ -60,7 +61,33 @@
                 <input id="linkBox" type="text" value="Click icon to paste link"
                     onpaste="updateImage(this)" onchange="updateImage(this)" oninput="updateImage(this)">
             </div>
+            <!-- Child 4: Step 2 instructions -->
+            <div>
+                <span class="number">2.</span>
+                <span class="heading">Scale and position image</span>
+            </div>
+            <!-- Child 5: Adjustment UI container -->
+            <div id="controlsUIContainer">
+                <div>
+                    <span class="adjustmentTitle">Scale:</span>
+                    <span id="scalePlus">>></span>
+                    <input id="scaleValue" class="adjustmentValue" type="text", value="100">
+                    <span id="scaleMinus"><<</span>
+                    <div>
+                        <input id="scaleSlider" class="adjustmentSlider" type="range" min="1" max="300" value="100">
+                    </div>
+                </div>
+                <div>
+                    <span class="adjustmentTitle">X Offset:</span>
+                </div>
+                <div>
+                    <span class="adjustmentTitle">Y Offset:</span>
+                </div>
+                <div>
+                    <span class="adjustmentTitle">Rotate:</span>
+                </div>
 
+            </div>
         </div>
     </div>
 
@@ -89,6 +116,8 @@
     <!-- Scripts -->
     <!--#########-->
 
+    <script src="global_functions.js"></script>
+
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-app.js"></script>
 
@@ -116,11 +145,10 @@
     <!-- Update image -->
     <script>
         function updateImage(element) {
-            image = document.getElementById("customImageDiv");
+            var image = document.getElementById("customImageDiv");
             if(element.id == "linkBox") {
                 var value = document.getElementById("linkBox").value;
-                var url = "url("+value+")"
-                console.log(url);
+                var url = "url("+value+")";
                 image.style.backgroundImage = url;
             }
         }
@@ -130,13 +158,8 @@
     <!-- Reset image -->
     <script>
         function resetImage() {
-            // Reset image on wrap
-            var image = document.getElementById("customImageDiv");
-            image.style.backgroundImage = "url()";
-
-            // Reset link field
-            var linkBox = document.getElementById("linkBox");
-            linkBox.value = "Click icon to paste link";
+            // Reload page
+            location.reload();
         }
     </script>
 
@@ -155,6 +178,46 @@
             .catch(err => {
                 console.error('Failed to read clipboard contents: ', err);
             });
+        }
+    </script>
+
+    <!-- Adjust uploaded image  -->
+    <script>
+        var image = document.getElementById("customImageDiv");
+        var competeValue;
+        function updateAdjustment(category, value) {
+            // console.log("category: "+category+" | "+"value: "+value);
+            if(category == "scale") {
+                competeValue = "auto "+value+"%";
+                image.style.backgroundSize = competeValue;
+            }
+        }
+
+        var scaleSlider = document.getElementById("scaleSlider");
+        var scaleValue = document.getElementById("scaleValue");
+        var scalePlus = document.getElementById("scalePlus");
+        var scaleMinus = document.getElementById("scaleMinus");
+
+        scaleSlider.oninput = function() {
+            scaleValue.value = this.value;
+            updateAdjustment("scale", this.value);
+        }
+        scaleValue.oninput = function() {
+            scaleSlider.value = this.value;
+            updateAdjustment("scale", this.value);
+        }
+        scalePlus.onclick = function() {
+            scaleValue.value ++;
+            scaleSlider.value = scaleValue.value;
+            updateAdjustment("scale", scaleValue.value);
+        }
+        scaleMinus.onclick = function() {
+            console.log("run");
+            if(scaleValue.value > 1) {
+                scaleValue.value --;
+                scaleSlider.value = scaleValue.value;
+                updateAdjustment("scale", scaleValue.value);
+            }
         }
     </script>
 
@@ -191,9 +254,75 @@
                     break;
                 }
             }
+            if(!modelFound) {
+                redirect("phone_selection.html?type=custom");
+            }
+        } else {
+            redirect("phone_selection.html?type=custom");
         }
     </script>
 
-    <script src="global_functions.js"></script>
+
+    <!-- Change page brightness -->
+    <script>
+        var slider = document.getElementById("brightnessSlider");
+        var page = document.getElementById("customWrapContainer");
+        var mask = document.getElementById("selectedPhoneMask");
+        var root = document.querySelector(":root");
+        var correctedValue;
+        var shade;
+
+        slider.oninput = function() {
+            correctedValue = this.value*10;
+            shade = "rgb("+correctedValue+","+correctedValue+","+correctedValue+")";
+            page.style.backgroundColor = shade;
+            switch(correctedValue) {
+                case 0:
+                    mask.style.filter = "brightness(0%)";
+                    root.style.setProperty("--brightness", "0%");
+                    break;
+                case 10:
+                    mask.style.filter = "brightness(10%)";
+                    root.style.setProperty("--brightness", "10%");
+                    break;
+                case 20:
+                    mask.style.filter = "brightness(20%)";
+                    root.style.setProperty("--brightness", "20%");
+                    break;
+                case 30:
+                    mask.style.filter = "brightness(56%)";
+                    root.style.setProperty("--brightness", "30%");
+                    break;
+                case 40:
+                    mask.style.filter = "brightness(76%)";
+                    root.style.setProperty("--brightness", "40%");
+                    break;
+                case 50:
+                    mask.style.filter = "brightness(95%)";
+                    root.style.setProperty("--brightness", "50%");
+                    break;
+                case 60:
+                    mask.style.filter = "brightness(112%)";
+                    root.style.setProperty("--brightness", "60%");
+                    break;
+                case 70:
+                    mask.style.filter = "brightness(130%)";
+                    root.style.setProperty("--brightness", "70%");
+                    break;
+                case 80:
+                    mask.style.filter = "brightness(151%)";
+                    root.style.setProperty("--brightness", "80%");
+                    break;
+                case 90:
+                    mask.style.filter = "brightness(170%)";
+                    root.style.setProperty("--brightness", "90%");
+                    break;
+                case 100:
+                    mask.style.filter = "brightness(190%)";
+                    root.style.setProperty("--brightness", "100%");
+                    break;
+            }
+        }
+    </script>
 </body>
 </html>

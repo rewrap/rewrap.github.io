@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="8.8266582mm"
+   height="9.1333332mm"
+   viewBox="0 0 8.8266582 9.1333332"
+   version="1.1"
+   id="svg929"
+   inkscape:version="1.0.2 (e86c8708, 2021-01-15)"
+   sodipodi:docname="Arrow thing.svg">
+  <defs
+     id="defs923" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="4.2705848"
+     inkscape:cx="14.306636"
+     inkscape:cy="16.827215"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="false"
+     inkscape:window-width="1440"
+     inkscape:window-height="872"
+     inkscape:window-x="0"
+     inkscape:window-y="28"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata926">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-89.324766,-108.82619)">
+    <g
+       id="g921"
+       transform="translate(-89.051354,7.9115787)"
+       style="stroke:#ffffff">
+      <path
+         style="opacity:1;fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
+         id="path907"
+         sodipodi:type="arc"
+         sodipodi:cx="181.72159"
+         sodipodi:cy="-107.79726"
+         sodipodi:rx="4.1452112"
+         sodipodi:ry="4.1401424"
+         sodipodi:start="0"
+         sodipodi:end="4.4473507"
+         sodipodi:open="true"
+         sodipodi:arc-type="arc"
+         transform="matrix(0.48881207,0.87238911,-0.87140597,0.49056258,0,0)"
+         d="m 185.8668,-107.79726 a 4.1452112,4.1401424 0 0 1 -3.77947,4.124 4.1452112,4.1401424 0 0 1 -4.44641,-3.39627 4.1452112,4.1401424 0 0 1 2.99485,-4.72331" />
+      <path
+         style="fill:none;stroke:#ffffff;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 186.84775,100.92138 0.0965,3.56329 -3.47657,-0.75031"
+         id="path913" />
+    </g>
+  </g>
+</svg>
