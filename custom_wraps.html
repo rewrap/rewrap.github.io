@@ -34,7 +34,7 @@
     </div>
 
     <!-- Hidden phone for computing styles -->
-    <img id="hiddenImage" alt="hidden image">
+    <img id="hiddenImage" onload="updateHiddenImage()" alt="hidden image">
 
     <!-- Custom wrap interface -->
     <div id="customWrapContainer">
@@ -178,14 +178,16 @@
                 var url = "url("+value+")";
                 root.style.setProperty("--source", url);
                 hiddenImage.setAttribute("src", linkBox.value);
-            }
+            }         
+        }
+
+        function updateHiddenImage() {
             // Resize hidden image
             var containerSize = phoneMask.getBoundingClientRect();
             hiddenImage.style.height = containerSize.height+"px";
             // Set psudo element width to hidden image width
             var imageSize = hiddenImage.getBoundingClientRect();
             root.style.setProperty("--imageWidth", imageSize.width+"px");
-
         }
     </script>
 
@@ -211,7 +213,7 @@
                 updateImage(linkBox);
             })
             .catch(err => {
-                console.error('Failed to read clipboard contents: ', err);
+                console.log('Failed to read clipboard contents');
             });
         }
     </script>
