@@ -33,6 +33,9 @@
         <span>Upload and position image</span>
     </div>
 
+    <!-- Hidden phone for computing styles -->
+    <img id="hiddenImage" alt="hidden image">
+
     <!-- Custom wrap interface -->
     <div id="customWrapContainer">
         <div id="phoneBackContainer">
@@ -53,12 +56,12 @@
             <!-- Child 2: Upload image box -->
             <div>
                 <img id="uploadButton" src="ui_images/cloud_icon.svg" title="Upload Image">
-                <input type="text" value="Click icon to upload file [currently unavailable]" readonly>
+                <input type="text" placeholder="Click icon to upload file [currently unavailable]" readonly>
             </div>
             <!-- Child 3: Link image box -->
             <div>
                 <img id="linkButton" onclick="pasteLink()" src="ui_images/link_icon.svg" title="Paste Link">
-                <input id="linkBox" type="text" value="Click icon to paste link"
+                <input id="linkBox" type="text" placeholder="Click icon to paste link"
                     onpaste="updateImage(this)" onchange="updateImage(this)" oninput="updateImage(this)">
             </div>
             <!-- Child 4: Step 2 instructions -->
@@ -70,6 +73,7 @@
             <div id="controlsUIContainer">
                 <div>
                     <span class="adjustmentTitle">Scale:</span>
+                    <img id="scaleReset" src="ui_images/reset_button.svg" alt="Reset Slider" title="Reset Slider">
                     <span id="scalePlus">>></span>
                     <input id="scaleValue" class="adjustmentValue" type="text", value="100">
                     <span id="scaleMinus"><<</span>
@@ -78,13 +82,34 @@
                     </div>
                 </div>
                 <div>
-                    <span class="adjustmentTitle">X Offset:</span>
+                    <span class="adjustmentTitle">X Position:</span>
+                    <img id="xposReset" src="ui_images/reset_button.svg" alt="Reset Slider" title="Reset Slider">
+                    <span id="xposPlus">>></span>
+                    <input id="xposValue" class="adjustmentValue" type="text", value="0">
+                    <span id="xposMinus"><<</span>
+                    <div>
+                        <input id="xposSlider" class="adjustmentSlider" type="range" min="-500" max="500" value="0">
+                    </div>
                 </div>
                 <div>
-                    <span class="adjustmentTitle">Y Offset:</span>
+                    <span class="adjustmentTitle">Y Position:</span>
+                    <img id="yposReset" src="ui_images/reset_button.svg" alt="Reset Slider" title="Reset Slider">
+                    <span id="yposPlus">>></span>
+                    <input id="yposValue" class="adjustmentValue" type="text", value="0">
+                    <span id="yposMinus"><<</span>
+                    <div>
+                        <input id="yposSlider" class="adjustmentSlider" type="range" min="-200" max="200" value="0">
+                    </div>
                 </div>
                 <div>
-                    <span class="adjustmentTitle">Rotate:</span>
+                    <span class="adjustmentTitle">Rotation:</span>
+                    <img id="rotationReset" src="ui_images/reset_button.svg" alt="Reset Slider" title="Reset Slider">
+                    <span id="rotationPlus">>></span>
+                    <input id="rotationValue" class="adjustmentValue" type="text", value="0">
+                    <span id="rotationMinus"><<</span>
+                    <div>
+                        <input id="rotationSlider" class="adjustmentSlider" type="range" min="0" max="360" value="0">
+                    </div>
                 </div>
 
             </div>
@@ -144,13 +169,23 @@
 
     <!-- Update image -->
     <script>
+        var phoneMask = document.getElementById("selectedPhoneMask");
+        var hiddenImage = document.getElementById("hiddenImage");
         function updateImage(element) {
-            var image = document.getElementById("customImageDiv");
+            // Update image source
             if(element.id == "linkBox") {
                 var value = document.getElementById("linkBox").value;
                 var url = "url("+value+")";
-                image.style.backgroundImage = url;
+                root.style.setProperty("--source", url);
+                hiddenImage.setAttribute("src", linkBox.value);
             }
+            // Resize hidden image
+            var containerSize = phoneMask.getBoundingClientRect();
+            hiddenImage.style.height = containerSize.height+"px";
+            // Set psudo element width to hidden image width
+            var imageSize = hiddenImage.getBoundingClientRect();
+            root.style.setProperty("--imageWidth", imageSize.width+"px");
+
         }
     </script>
 
@@ -183,21 +218,26 @@
 
     <!-- Adjust uploaded image  -->
     <script>
-        var image = document.getElementById("customImageDiv");
-        var competeValue;
+        const root = document.querySelector(":root");
+        var variableCategory;
+        var unitValue;
         function updateAdjustment(category, value) {
-            // console.log("category: "+category+" | "+"value: "+value);
-            if(category == "scale") {
-                competeValue = "auto "+value+"%";
-                image.style.backgroundSize = competeValue;
+            if(category == "rotation") {
+                unitValue = value+"deg";
+            } else if(category == "scale") {
+                unitValue = value/100;
+            } else {
+                unitValue = value+"%";
             }
+            variableCategory = "--"+category;
+            root.style.setProperty(variableCategory, unitValue);
         }
-
+        // Scaling settings
         var scaleSlider = document.getElementById("scaleSlider");
         var scaleValue = document.getElementById("scaleValue");
         var scalePlus = document.getElementById("scalePlus");
         var scaleMinus = document.getElementById("scaleMinus");
-
+        var scaleReset = document.getElementById("scaleReset");
         scaleSlider.oninput = function() {
             scaleValue.value = this.value;
             updateAdjustment("scale", this.value);
@@ -212,15 +252,109 @@
             updateAdjustment("scale", scaleValue.value);
         }
         scaleMinus.onclick = function() {
-            console.log("run");
-            if(scaleValue.value > 1) {
+            if(scaleValue.value > scaleSlider.min) {
                 scaleValue.value --;
                 scaleSlider.value = scaleValue.value;
                 updateAdjustment("scale", scaleValue.value);
             }
         }
+        scaleReset.onclick = function() {
+            scaleValue.value = scaleValue.getAttribute("value");
+            scaleSlider.value = scaleValue.value;
+            updateAdjustment("scale", scaleValue.value);
+        }
+        // X position settings
+        var xposSlider = document.getElementById("xposSlider");
+        var xposValue = document.getElementById("xposValue");
+        var xposPlus = document.getElementById("xposPlus");
+        var xposMinus = document.getElementById("xposMinus");
+        var xposReset = document.getElementById("xposReset");
+        xposSlider.oninput = function() {
+            xposValue.value = this.value;
+            updateAdjustment("xpos", this.value);
+        }
+        xposValue.oninput = function() {
+            xposSlider.value = this.value;
+            updateAdjustment("xpos", this.value);
+        }
+        xposPlus.onclick = function() {
+            xposValue.value ++;
+            xposSlider.value = xposValue.value;
+            updateAdjustment("xpos", xposValue.value);
+        }
+        xposMinus.onclick = function() {
+            xposValue.value --;
+            xposSlider.value = xposValue.value;
+            updateAdjustment("xpos", xposValue.value);
+        }
+        xposReset.onclick = function() {
+            xposValue.value = xposValue.getAttribute("value");
+            xposSlider.value = xposValue.value;
+            updateAdjustment("xpos", xposValue.value);
+        }
+        // Y position settings
+        var yposSlider = document.getElementById("yposSlider");
+        var yposValue = document.getElementById("yposValue");
+        var yposPlus = document.getElementById("yposPlus");
+        var yposMinus = document.getElementById("yposMinus");
+        var yposReset = document.getElementById("yposReset");
+        yposSlider.oninput = function() {
+            yposValue.value = this.value;
+            updateAdjustment("ypos", this.value);
+        }
+        yposValue.oninput = function() {
+            yposSlider.value = this.value;
+            updateAdjustment("ypos", this.value);
+        }
+        yposPlus.onclick = function() {
+            yposValue.value ++;
+            yposSlider.value = yposValue.value;
+            updateAdjustment("ypos", yposValue.value);
+        }
+        yposMinus.onclick = function() {
+            yposValue.value --;
+            yposSlider.value = yposValue.value;
+            updateAdjustment("ypos", yposValue.value);
+        }
+        yposReset.onclick = function() {
+            yposValue.value = yposValue.getAttribute("value");
+            yposSlider.value = yposValue.value;
+            updateAdjustment("ypos", yposValue.value);
+        }
+        // Rotation settings
+        var rotationSlider = document.getElementById("rotationSlider");
+        var rotationValue = document.getElementById("rotationValue");
+        var rotationPlus = document.getElementById("rotationPlus");
+        var rotationMinus = document.getElementById("rotationMinus");
+        var rotationReset = document.getElementById("rotationReset");
+        rotationSlider.oninput = function() {
+            rotationValue.value = this.value;
+            updateAdjustment("rotation", this.value);
+        }
+        rotationValue.oninput = function() {
+            rotationSlider.value = this.value;
+            updateAdjustment("rotation", this.value);
+        }
+        rotationPlus.onclick = function() {
+            if(rotationValue.value < 360) {
+                rotationValue.value ++;
+                rotationSlider.value = rotationValue.value;
+                updateAdjustment("rotation", rotationValue.value);
+            }
+        }
+        rotationMinus.onclick = function() {
+            if(rotationValue.value > 0) {
+                rotationValue.value --;
+                rotationSlider.value = rotationValue.value;
+                updateAdjustment("rotation", rotationValue.value);
+            }
+        }
+        rotationReset.onclick = function() {
+            rotationValue.value = rotationValue.getAttribute("value");
+            rotationSlider.value = rotationValue.value;
+            updateAdjustment("rotation", rotationValue.value);
+        }
     </script>
-
 
     <!-- Set phone model in sub-nav -->
     <script src="apple_phones.js"></script> <!-- Apple phones array -->
@@ -268,7 +402,7 @@
         var slider = document.getElementById("brightnessSlider");
         var page = document.getElementById("customWrapContainer");
         var mask = document.getElementById("selectedPhoneMask");
-        var root = document.querySelector(":root");
+        // var root = document.querySelector(":root");
         var correctedValue;
         var shade;
 

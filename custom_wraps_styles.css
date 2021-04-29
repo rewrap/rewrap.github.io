@@ -29,13 +29,32 @@
     color: white;
     font-size: 35px;
 }
+/* Custom image #################################### */
 #customImageDiv {
+    position: relative;
     width: 90%;
     max-height: 800px;
     background-color: white;
-    background-position: 50% 50%;
-    background-size: auto 100%;
-    background-repeat: no-repeat;
+    overflow: hidden;
+}
+#customImageDiv::before {
+  content: "";
+  position: absolute;
+  width: var(--imageWidth);
+  height: 100%;
+  top: var(--ypos);
+  left: var(--xpos);
+  z-index: 0;
+  background-color: white;
+  background-image: var(--source);
+  background-position: center;
+  background-size: auto 100%;
+  background-repeat: no-repeat;
+  transform: scale(var(--scale)) rotate(var(--rotation));
+}
+#hiddenImage {
+    position: absolute;
+    z-index: -5;
 }
 #selectedPhoneMask {
     display: block;
@@ -149,7 +168,7 @@
 }
 /* Adjustment container */
 #controlsUIContainer > div {
-    width: 90%;
+    width: 95%;
     height: 25px;
     margin: 15px 0 15px 0;
     color: white;
@@ -164,14 +183,6 @@
 /* All items that aren't title */
 #controlsUIContainer div * {
     float: right;
-}
-/* Fine adjustment arrows */
-#controlsUIContainer div span {
-    font-size: 25px;
-    cursor: pointer;
-}
-#controlsUIContainer div span::selection {
-    background: transparent;
 }
 /* Adjustment slider container and child */
 #controlsUIContainer div div {
@@ -202,15 +213,30 @@ input.adjustmentSlider::-webkit-slider-thumb {
     border-style: solid;
     cursor: pointer;
 }
-
 /* Value from slider */
 .adjustmentValue {
-    width: 50px;
+    width: 65px;
     height: 25px;
     margin: 2px 5px 0 5px;
     padding: 0;
     border: none;
     font-size: 25px;
+    text-align: center;
     color: white;
     background-color: rgba(0, 0, 0, 0);
+}
+/* Fine adjustment arrows */
+#controlsUIContainer div span {
+    font-size: 25px;
+    cursor: pointer;
+}
+#controlsUIContainer div span::selection {
+    background: transparent;
+}
+/* Reset Button */
+#controlsUIContainer div img {
+    width: 25px;
+    height: 25px;
+    margin-left: 20px;
+    cursor: pointer;
 }

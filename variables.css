@@ -4,6 +4,15 @@
     --specialBlack: #1A1A1A;
     --specialGrey: #353535;
 
-    /* Other stuff */
+    /* Misc */
     --brightness: 50%;
+
+    /* Custom wrap settings */
+    --source: url("");
+    --imageWidth: 100%;
+    --scale: 100%;
+    --xpos: 0%;
+    --ypos: 0%;
+    --rotation: 0;
+
 }
