@@ -196,17 +196,23 @@
         var canvas = document.getElementById("uploadedImageCanvas");
         var context = canvas.getContext('2d');
         var canvasImage;
+        var mask = document.createElement("img");
+        mask.setAttribute("src", "phone_masks/ip_temp_mask.png");
 
         function updateImage() {
             var scale = Number(getComputedStyle(root).getPropertyValue("--scale"));
             var xpos = Number(getComputedStyle(root).getPropertyValue("--xpos"));
             var ypos = Number(getComputedStyle(root).getPropertyValue("--ypos"));
             var rotation = Number(getComputedStyle(root).getPropertyValue("--rotation"));
+
+            // context.drawImage(mask, -canvasImage.width/2,-canvasImage.height/2, canvas.width, canvas.height);
+            // context.globalCompositeOperation = 'source-in';
+
             context.clearRect(0,0,canvas.width,canvas.height);
             context.save();
             context.translate((canvas.width/2)+(xpos*scale*canvasImage.width),(canvas.height/2)+(ypos*scale*canvasImage.height));
             context.rotate(rotation*Math.PI/180);
-            context.drawImage(canvasImage,-canvas.width/2,-canvas.height/2,canvasImage.width*scale,canvasImage.height*scale);
+            context.drawImage(canvasImage,-canvasImage.width/2,-canvasImage.height/2,canvasImage.width*scale,canvasImage.height*scale);
             context.restore();
         }
 
