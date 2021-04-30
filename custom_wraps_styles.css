@@ -33,38 +33,31 @@
 #customImageDiv {
     position: relative;
     width: 90%;
-    max-height: 800px;
     background-color: white;
     overflow: hidden;
 }
-#customImageDiv::before {
-  content: "";
-  position: absolute;
-  width: var(--imageWidth);
-  height: 100%;
-  top: var(--ypos);
-  left: var(--xpos);
-  z-index: 0;
-  background-color: white;
-  background-image: var(--source);
-  background-position: center;
-  background-size: auto 100%;
-  background-repeat: no-repeat;
-  transform: scale(var(--scale)) rotate(var(--rotation));
+#uploadedImageCanvas {
+    width: auto;
+    height: 100%;
 }
 #hiddenImage {
     position: absolute;
     z-index: -5;
+    max-width:100%;
+    max-height:100%;
+    height: auto;
+    width:auto;
+    opacity: 0;
 }
 #selectedPhoneMask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 90%;
     display: block;
     filter: brightness(100%);
     width: 100%;
 }
-#uploadedImageCanvas {
-    display: none;
-}
-
 #selectorUIContainer {
     width: 800px;
     height: 800px;

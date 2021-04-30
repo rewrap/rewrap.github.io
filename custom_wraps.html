@@ -34,13 +34,14 @@
     </div>
 
     <!-- Hidden phone for computing styles -->
-    <img id="hiddenImage" alt="hidden image">
+    <img id="hiddenImage" onload="generateCanvas(this)" alt="hidden image">
 
     <!-- Custom wrap interface -->
     <div id="customWrapContainer">
         <div id="phoneBackContainer">
             <h1 id="selectedPhoneName"></h1>
             <div id="customImageDiv">
+                <canvas id="uploadedImageCanvas"></canvas>
                 <img id="selectedPhoneMask" onclick="exportDiv()">
             </div>
             <p>[Wrap Preview]</p>
@@ -56,13 +57,13 @@
             <!-- Child 2: Upload image box -->
             <div>
                 <label for="fileField"><img id="uploadButton" src="ui_images/cloud_icon.svg" title="Upload Image"></label>
-                <input type="file" name="fileField" id="fileField" accept="image/png, image/jpeg">
+                <input type="file" name="fileField" id="fileField" accept="image/png, image/jpeg" oninput ="generateCanvas(this.files[0])">
             </div>
             <!-- Child 3: Link image box -->
             <div>
                 <img id="linkButton" onclick="pasteLink()" src="ui_images/link_icon.svg" title="Paste Link">
                 <input id="linkBox" type="text" placeholder="Click icon to paste link"
-                    onpaste="updateImage(this)" onchange="updateImage(this)" oninput="updateImage(this)">
+                    onpaste="updateLink()" onchange="updateLink()" oninput="updateLink()">
             </div>
             <!-- Child 4: Step 2 instructions -->
             <div>
@@ -121,8 +122,6 @@
         <span onclick="backToTop()">Back to top ▲</span>
     </div>
 
-    <canvas id="uploadedImageCanvas"></canvas>
-
     <!-- Footer -->
     <div id="footerContainer">
         <div id="footerSocials">
@@ -173,40 +172,10 @@
     <!-- Export image? -->
     <script>
         function exportDiv() {
-            console.log("export started");
+            console.log("export triggered");
             html2canvas(document.querySelector("#customImageDiv")).then(canvas => {
              document.body.appendChild(canvas)
             });
-        }
-    </script>
-
-    <!-- Update image -->
-    <script>
-        var phoneMask = document.getElementById("selectedPhoneMask");
-        var hiddenImage = document.getElementById("hiddenImage");
-        var fileField = document.getElementById("fileField");
-
-        function updateImage(input) {
-            // Update image source
-            if(input.id == "linkBox") {
-                fileField.value = "";
-                var value = document.getElementById("linkBox").value;
-                root.style.setProperty("--source", url);
-                hiddenImage.setAttribute("src", linkBox.value);
-            } else {
-                var url = "url("+input+")";
-                root.style.setProperty("--source", url);
-                hiddenImage.setAttribute("src", input);
-            }
-        }
-
-        hiddenImage.onload= function() {
-            // Resize hidden image
-            var containerSize = phoneMask.getBoundingClientRect();
-            hiddenImage.style.height = containerSize.height+"px";
-            // Set psudo element width to hidden image width
-            var imageSize = hiddenImage.getBoundingClientRect();
-            root.style.setProperty("--imageWidth", imageSize.width+"px");
         }
     </script>
 
@@ -220,46 +189,31 @@
     </script>
 
 
-    <!-- Upload image and Paste link -->
+    <!-- Update image -->
     <script>
+        const root = document.querySelector(":root");
+
+        var phoneMask = document.getElementById("selectedPhoneMask");
+        var hiddenImage = document.getElementById("hiddenImage");
         var fileField = document.getElementById("fileField");
-        var linkBox = document.getElementById("linkBox");
-        
-        fileField.oninput = function() { 
-            var uploadedImageCanvas = document.getElementById("uploadedImageCanvas");
-            var context = uploadedImageCanvas.getContext('2d');
-            var imageData = fileField.files[0];
 
-            createImageBitmap(imageData).then(function(response) {
-                uploadedImageCanvas.setAttribute("width", response.width+"px");
-                uploadedImageCanvas.setAttribute("height", response.height+"px");
-                console.log(response);
-                context.drawImage(response, 0, 0);
-
-                var dataUrl = uploadedImageCanvas.toDataURL('image/jpeg', 0.5);
-                redirect(dataUrl);
-                updateImage(dataUrl);
-
-            });
-        }
-
-        function pasteLink() {
-            linkBox.select();
-            linkBox.setAttribute("value", "");
-            navigator.clipboard.readText()
-            .then(text => {
-                linkBox.value = text;
-                updateImage(linkBox);
-            })
-            .catch(err => {
-                console.log('Failed to read clipboard contents');
-            });
+        function updateImage() {
+            console.log(">:(");
+            /*############################################
+            #                                            #
+            #                                            #
+            #                                            #
+            #       Moving Image Coming Soon!            #
+            #                                            #
+            #                                            #
+            #                                            #
+            ############################################*/
         }
     </script>
+    
 
     <!-- Adjust uploaded image  -->
     <script>
-        const root = document.querySelector(":root");
         var variableCategory;
         var unitValue;
         function updateAdjustment(category, value) {
@@ -272,6 +226,7 @@
             }
             variableCategory = "--"+category;
             root.style.setProperty(variableCategory, unitValue);
+            updateImage();
         }
         // Scaling settings
         var scaleSlider = document.getElementById("scaleSlider");
@@ -397,7 +352,53 @@
         }
     </script>
 
-    <!-- Set phone model mask and title -->
+
+    <!-- Generate canvas when source is added -->
+    <script>
+    function generateCanvas(imageData) {
+        var fileField = document.getElementById("fileField");
+        var uploadedImageCanvas = document.getElementById("uploadedImageCanvas");
+        var context = uploadedImageCanvas.getContext('2d');
+        console.log(imageData);
+        
+        // Generate canvas based on image data
+        createImageBitmap(imageData).then(function(response) {
+            var containerSize = document.getElementById("selectedPhoneMask").getBoundingClientRect();
+            var canvasHeight= response.height+"px";
+            var canvasWidth = response.height*(containerSize.width/containerSize.height)+"px";
+            uploadedImageCanvas.setAttribute("height", canvasHeight);
+            uploadedImageCanvas.setAttribute("width", canvasWidth);
+            context.drawImage(response, 0, 0);
+        });
+    }
+    </script>
+
+
+    <!-- Paste/update link -->
+    <script>
+        var linkBox = document.getElementById("linkBox");
+        var fileField = document.getElementById("fileField")
+        function pasteLink() {
+            linkBox.select();
+            navigator.clipboard.readText()
+            .then(text => {
+                linkBox.value = text;
+                fileField.value = "";
+                var url = "url("+linkBox.value+")";
+                root.style.setProperty("--source", url);
+                hiddenImage.setAttribute("src", linkBox.value);
+            });
+        }
+        function updateLink() {
+            fileField.value = "";
+            var url = "url("+linkBox.value+")";
+            root.style.setProperty("--source", url);
+            hiddenImage.setAttribute("src", linkBox.value);
+        }
+    </script>
+
+
+    <!-- Set phone model mask and title / Initialise wrap preview -->
     <script src="apple_phones.js"></script> <!-- Apple phones array -->
     <script src="samsung_phones.js"></script> <!-- Samsung phones array -->
 
@@ -406,6 +407,8 @@
         var modelFound = false;
         var phoneTitle = document.getElementById("selectedPhoneName");
         var phoneMask = document.getElementById("selectedPhoneMask");
+        var customImageDiv = document.getElementById("customImageDiv");
+
         if(params.has("phone")) {
             for(item of apple_phones) {
                 if(!modelFound) {
@@ -435,6 +438,11 @@
         } else {
             redirect("phone_selection.html?type=custom");
         }
+
+        phoneMask.onload = function () {
+            var maskDimensions = phoneMask.getBoundingClientRect();
+            customImageDiv.style.height = maskDimensions.height+"px";
+        }
     </script>
 
 
@@ -443,7 +451,6 @@
         var slider = document.getElementById("brightnessSlider");
         var page = document.getElementById("customWrapContainer");
         var mask = document.getElementById("selectedPhoneMask");
-        // var root = document.querySelector(":root");
         var correctedValue;
         var shade;
 
