@@ -192,22 +192,27 @@
     <!-- Update image -->
     <script>
         const root = document.querySelector(":root");
-
-        var phoneMask = document.getElementById("selectedPhoneMask");
-        var hiddenImage = document.getElementById("hiddenImage");
         var fileField = document.getElementById("fileField");
+        var canvas = document.getElementById("uploadedImageCanvas");
+        var context = canvas.getContext('2d');
+        var canvasImage;
 
         function updateImage() {
-            console.log(">:(");
-            /*############################################
-            #                                            #
-            #                                            #
-            #                                            #
-            #       Moving Image Coming Soon!            #
-            #                                            #
-            #                                            #
-            #                                            #
-            ############################################*/
+            context.drawImage(canvasImage, 0, 0);
+        }
+
+        // Generate canvas when source is added 
+        function generateCanvas(imageData) {
+            // Generate canvas based on image data
+            createImageBitmap(imageData).then(function(response) {
+                var containerSize = document.getElementById("selectedPhoneMask").getBoundingClientRect();
+                var canvasHeight= response.height+"px";
+                var canvasWidth = response.height*(containerSize.width/containerSize.height)+"px";
+                uploadedImageCanvas.setAttribute("height", canvasHeight);
+                uploadedImageCanvas.setAttribute("width", canvasWidth);
+                canvasImage = response;
+                updateImage();
+            });
         }
     </script>
     
@@ -352,32 +357,11 @@
         }
     </script>
 
-
-    <!-- Generate canvas when source is added -->
-    <script>
-    function generateCanvas(imageData) {
-        var fileField = document.getElementById("fileField");
-        var uploadedImageCanvas = document.getElementById("uploadedImageCanvas");
-        var context = uploadedImageCanvas.getContext('2d');
-        console.log(imageData);
-        
-        // Generate canvas based on image data
-        createImageBitmap(imageData).then(function(response) {
-            var containerSize = document.getElementById("selectedPhoneMask").getBoundingClientRect();
-            var canvasHeight= response.height+"px";
-            var canvasWidth = response.height*(containerSize.width/containerSize.height)+"px";
-            uploadedImageCanvas.setAttribute("height", canvasHeight);
-            uploadedImageCanvas.setAttribute("width", canvasWidth);
-            context.drawImage(response, 0, 0);
-        });
-    }
-    </script>
-
-
     <!-- Paste/update link -->
     <script>
+        var hiddenImage = document.getElementById("hiddenImage");
         var linkBox = document.getElementById("linkBox");
-        var fileField = document.getElementById("fileField")
+        var fileField = document.getElementById("fileField");
         function pasteLink() {
             linkBox.select();
             navigator.clipboard.readText()
