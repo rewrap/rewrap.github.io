@@ -34,7 +34,7 @@
     position: relative;
     width: 90%;
     max-height: 800px;
-    background-color: pink;
+    background-color: white;
     overflow: hidden;
 }
 #customImageDiv::before {
@@ -45,7 +45,7 @@
   top: var(--ypos);
   left: var(--xpos);
   z-index: 0;
-  background-color: pink;
+  background-color: white;
   background-image: var(--source);
   background-position: center;
   background-size: auto 100%;
@@ -101,16 +101,26 @@
 #brightnessSlider:hover {
     opacity: 1;
 }
-#brightnessSlider::-webkit-slider-thumb, #brightnessSlider::-moz-range-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
-  background-image: url(ui_images/slider_icon.png);
-  background-size: cover;
-  filter: brightness(var(--brightness));
-  cursor: pointer;
+#brightnessSlider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background-image: url(ui_images/slider_icon.png);
+    background-size: cover;
+    filter: brightness(var(--brightness));
+    cursor: pointer;
+}
+#brightnessSlider::-moz-range-thumb {
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background-image: url(ui_images/slider_icon.png);
+    background-size: cover;
+    filter: brightness(var(--brightness));
+    cursor: pointer;
 }
 #deleteButton {
     float: right;
@@ -219,8 +229,18 @@ input.adjustmentSlider {
     appearance: none;
     
 }
-input.adjustmentSlider::-webkit-slider-thumb, input.adjustmentSlider::-moz-range-thumb {
+input.adjustmentSlider::-webkit-slider-thumb {
     -webkit-appearance: none;
+    appearance: none;
+    width: 12px;
+    height: 25px;
+    background-color: #636363;
+    border-radius: 2px;
+    color: white;
+    border-style: solid;
+    cursor: pointer;
+}
+input.adjustmentSlider::-moz-range-thumb {
     appearance: none;
     width: 12px;
     height: 25px;
