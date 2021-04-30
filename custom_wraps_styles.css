@@ -101,7 +101,7 @@
 #brightnessSlider:hover {
     opacity: 1;
 }
-#brightnessSlider::-webkit-slider-thumb {
+#brightnessSlider::-webkit-slider-thumb, #brightnessSlider::-moz-range-thumb {
   -webkit-appearance: none;
   appearance: none;
   width: 25px;
@@ -141,7 +141,7 @@
 #uploadButton:hover, #linkButton:hover {
     opacity: 80%;
 }
-#fileField::-webkit-file-upload-button {
+#fileField::-webkit-file-upload-button, #fileField::file-selector-button {
     display: none;
 }
 #fileField {
@@ -219,7 +219,7 @@ input.adjustmentSlider {
     appearance: none;
     
 }
-input.adjustmentSlider::-webkit-slider-thumb {
+input.adjustmentSlider::-webkit-slider-thumb, input.adjustmentSlider::-moz-range-thumb {
     -webkit-appearance: none;
     appearance: none;
     width: 12px;
