@@ -34,14 +34,14 @@
     </div>
 
     <!-- Hidden phone for computing styles -->
-    <img id="hiddenImage" onload="updateHiddenImage()" alt="hidden image">
+    <img id="hiddenImage" alt="hidden image">
 
     <!-- Custom wrap interface -->
     <div id="customWrapContainer">
         <div id="phoneBackContainer">
             <h1 id="selectedPhoneName"></h1>
             <div id="customImageDiv">
-                <img id="selectedPhoneMask">
+                <img id="selectedPhoneMask" onclick="exportDiv()">
             </div>
             <p>[Wrap Preview]</p>
         </div>
@@ -55,8 +55,8 @@
             </div>
             <!-- Child 2: Upload image box -->
             <div>
-                <img id="uploadButton" src="ui_images/cloud_icon.svg" title="Upload Image">
-                <input type="text" placeholder="Click icon to upload file [currently unavailable]" readonly>
+                <label for="fileField"><img id="uploadButton" src="ui_images/cloud_icon.svg" title="Upload Image"></label>
+                <input type="file" name="fileField" id="fileField" accept="image/png, image/jpeg">
             </div>
             <!-- Child 3: Link image box -->
             <div>
@@ -121,6 +121,8 @@
         <span onclick="backToTop()">Back to top ▲</span>
     </div>
 
+    <canvas id="uploadedImageCanvas"></canvas>
+
     <!-- Footer -->
     <div id="footerContainer">
         <div id="footerSocials">
@@ -142,6 +144,7 @@
     <!--#########-->
 
     <script src="global_functions.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
 
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-app.js"></script>
@@ -167,21 +170,37 @@
     firebase.analytics();
     </script>
 
+    <!-- Export image? -->
+    <script>
+        function exportDiv() {
+            console.log("export started");
+            html2canvas(document.querySelector("#customImageDiv")).then(canvas => {
+             document.body.appendChild(canvas)
+            });
+        }
+    </script>
+
     <!-- Update image -->
     <script>
         var phoneMask = document.getElementById("selectedPhoneMask");
         var hiddenImage = document.getElementById("hiddenImage");
-        function updateImage(element) {
+        var fileField = document.getElementById("fileField");
+
+        function updateImage(input) {
             // Update image source
-            if(element.id == "linkBox") {
+            if(input.id == "linkBox") {
+                fileField.value = "";
                 var value = document.getElementById("linkBox").value;
-                var url = "url("+value+")";
                 root.style.setProperty("--source", url);
                 hiddenImage.setAttribute("src", linkBox.value);
-            }         
+            } else {
+                var url = "url("+input+")";
+                root.style.setProperty("--source", url);
+                hiddenImage.setAttribute("src", input);
+            }
         }
 
-        function updateHiddenImage() {
+        hiddenImage.onload= function() {
             // Resize hidden image
             var containerSize = phoneMask.getBoundingClientRect();
             hiddenImage.style.height = containerSize.height+"px";
@@ -201,10 +220,30 @@
     </script>
 
 
-    <!-- Paste link -->
+    <!-- Upload image and Paste link -->
     <script>
+        var fileField = document.getElementById("fileField");
+        var linkBox = document.getElementById("linkBox");
+        
+        fileField.oninput = function() { 
+            var uploadedImageCanvas = document.getElementById("uploadedImageCanvas");
+            var context = uploadedImageCanvas.getContext('2d');
+            var imageData = fileField.files[0];
+
+            createImageBitmap(imageData).then(function(response) {
+                uploadedImageCanvas.setAttribute("width", response.width+"px");
+                uploadedImageCanvas.setAttribute("height", response.height+"px");
+                console.log(response);
+                context.drawImage(response, 0, 0);
+
+                var dataUrl = uploadedImageCanvas.toDataURL('image/jpeg', 0.5);
+                redirect(dataUrl);
+                updateImage(dataUrl);
+
+            });
+        }
+
         function pasteLink() {
-            var linkBox = document.getElementById("linkBox");
             linkBox.select();
             linkBox.setAttribute("value", "");
             navigator.clipboard.readText()
