@@ -57,7 +57,7 @@
             <!-- Child 2: Upload image box -->
             <div>
                 <label for="fileField"><img id="uploadButton" src="ui_images/cloud_icon.svg" title="Upload Image"></label>
-                <input type="file" name="fileField" id="fileField" accept="image/png, image/jpeg" oninput ="generateCanvas(this.files[0])">
+                <input type="file" name="fileField" id="fileField" accept="image/png, image/jpeg" oninput ="generateCanvas(this.files[0], true)">
             </div>
             <!-- Child 3: Link image box -->
             <div>
@@ -89,7 +89,7 @@
                     <input id="xposValue" class="adjustmentValue" type="text", value="0">
                     <span id="xposMinus"><<</span>
                     <div>
-                        <input id="xposSlider" class="adjustmentSlider" type="range" min="-500" max="500" value="0">
+                        <input id="xposSlider" class="adjustmentSlider" type="range" min="-200" max="200" value="0">
                     </div>
                 </div>
                 <div>
@@ -109,7 +109,7 @@
                     <input id="rotationValue" class="adjustmentValue" type="text", value="0">
                     <span id="rotationMinus"><<</span>
                     <div>
-                        <input id="rotationSlider" class="adjustmentSlider" type="range" min="0" max="360" value="0">
+                        <input id="rotationSlider" class="adjustmentSlider" type="range" min="-180" max="180" value="0">
                     </div>
                 </div>
 
@@ -198,11 +198,24 @@
         var canvasImage;
 
         function updateImage() {
-            context.drawImage(canvasImage, 0, 0);
+            var scale = Number(getComputedStyle(root).getPropertyValue("--scale"));
+            var xpos = Number(getComputedStyle(root).getPropertyValue("--xpos"));
+            var ypos = Number(getComputedStyle(root).getPropertyValue("--ypos"));
+            var rotation = Number(getComputedStyle(root).getPropertyValue("--rotation"));
+            context.clearRect(0,0,canvas.width,canvas.height);
+            context.save();
+            context.translate((canvas.width/2)+(xpos*scale*canvasImage.width),(canvas.height/2)+(ypos*scale*canvasImage.height));
+            context.rotate(rotation*Math.PI/180);
+            context.drawImage(canvasImage,-canvas.width/2,-canvas.height/2,canvasImage.width*scale,canvasImage.height*scale);
+            context.restore();
         }
 
         // Generate canvas when source is added 
-        function generateCanvas(imageData) {
+        function generateCanvas(imageData,fromUpload) {
+            // Fudge to clear link field when image is uploaded
+            if(fromUpload) {
+                document.getElementById("linkBox").value = "";
+            }
             // Generate canvas based on image data
             createImageBitmap(imageData).then(function(response) {
                 var containerSize = document.getElementById("selectedPhoneMask").getBoundingClientRect();
@@ -222,12 +235,10 @@
         var variableCategory;
         var unitValue;
         function updateAdjustment(category, value) {
-            if(category == "rotation") {
-                unitValue = value+"deg";
-            } else if(category == "scale") {
+            if(category != "rotation") {
                 unitValue = value/100;
             } else {
-                unitValue = value+"%";
+                unitValue = value;
             }
             variableCategory = "--"+category;
             root.style.setProperty(variableCategory, unitValue);
@@ -337,14 +348,14 @@
             updateAdjustment("rotation", this.value);
         }
         rotationPlus.onclick = function() {
-            if(rotationValue.value < 360) {
+            if(rotationValue.value < 180) {
                 rotationValue.value ++;
                 rotationSlider.value = rotationValue.value;
                 updateAdjustment("rotation", rotationValue.value);
             }
         }
         rotationMinus.onclick = function() {
-            if(rotationValue.value > 0) {
+            if(rotationValue.value > -180) {
                 rotationValue.value --;
                 rotationSlider.value = rotationValue.value;
                 updateAdjustment("rotation", rotationValue.value);
