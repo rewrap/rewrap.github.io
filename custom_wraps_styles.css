@@ -132,6 +132,9 @@
     justify-content: flex-start;
     align-items: center;
 }
+#selectorUIContainer > #linkDiv {
+    display: none;
+}
 #uploadButton, #linkButton {
     height: 55px;
     margin-right: 15px;

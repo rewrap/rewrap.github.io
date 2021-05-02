@@ -33,7 +33,7 @@
         <span>Upload and position image</span>
     </div>
 
-    <!-- Hidden phone for computing styles -->
+    <!-- Hidden image for computing styles -->
     <img id="hiddenImage" onload="generateCanvas(this)" alt="hidden image">
 
     <!-- Custom wrap interface -->
@@ -50,7 +50,7 @@
             <!-- Child 1: Step one instructions + Dark slider + Clear -->
             <div>
                 <span class="number">1.</span>
-                <span class="heading">Upload or link your image</span>
+                <span class="heading">Upload your image</span>
                 <img id="deleteButton" onclick="resetImage()" src="ui_images/bin_icon.svg" alt="Clear Button" title="Reset Image">
                 <input id="brightnessSlider" type="range" min="0" max="10" value="5">
             </div>
@@ -59,8 +59,8 @@
                 <label for="fileField"><img id="uploadButton" src="ui_images/cloud_icon.svg" title="Upload Image"></label>
                 <input type="file" name="fileField" id="fileField" accept="image/png, image/jpeg" oninput ="generateCanvas(this.files[0], true)">
             </div>
-            <!-- Child 3: Link image box -->
-            <div>
+            <!-- Child 3: Link image box (Disabled due to CORS errors) -->
+            <div id="linkDiv">
                 <img id="linkButton" onclick="pasteLink()" src="ui_images/link_icon.svg" title="Paste Link">
                 <input id="linkBox" type="text" placeholder="Click icon to paste link"
                     onpaste="updateLink()" onchange="updateLink()" oninput="updateLink()">
@@ -467,6 +467,17 @@
             }
         } else {
             redirect("phone_selection.html?type=custom");
+        }
+
+        // Enable link if URL parameter present
+        if(params.has("link")) {
+            console.log("link true")
+            document.getElementById("linkDiv").style.display = "flex";
+        }
+
+        // Enable a secret
+        if(params.has("pink")) {
+            document.getElementById("customImageDiv").style.backgroundColor = "pink";
         }
 
         phoneMask.onload = function () {
