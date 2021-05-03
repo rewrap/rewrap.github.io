@@ -41,7 +41,7 @@
     width: 120px;
 }
 .phoneImageContainer span {
-    font-family: AppleGothicNeo;
+    font-family: AppleGothicNeo, sans-serif;
     margin-top: 20px;
     color: white;
     font-size: 28px;

@@ -169,42 +169,43 @@
     </script>
 
     <!-- Export image? -->
-    <script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
     <script src="canvasmask.js"></script>
     <script>
         var canvas = document.getElementById("uploadedImageCanvas");
         function exportDiv() {
             console.log("export triggered");
-            // html2canvas(document.querySelector("#customImageDiv")).then(canvas => {
-            //  document.body.appendChild(canvas)
-            // });
             var exportURL = canvas.toDataURL("image/png", 1);
-            var exportIMG = document.createElement("img");
+            var exportIMG = document.createElement("img"); //This will be an image in a hidden modal
             exportIMG.setAttribute("id", exportIMG);
             exportIMG.setAttribute("class", "mask");
             exportIMG.setAttribute("src", exportURL);
             exportIMG.setAttribute("onload", "maskImage(this)");
-            exportIMG.setAttribute("data-mask", "ip_temp_mask.png");
+            if(document.getElementById("selectedPhoneMask").getAttribute("phone-category") == "ip") {
+                exportIMG.setAttribute("data-mask", "phone_masks/ip_temp_mask.png");
+            } else {
+                exportIMG.setAttribute("data-mask", "phone_masks/s_temp_mask.png");
+            }
             document.getElementById("footerContainer").appendChild(exportIMG);
         }
 
         function maskImage(element) {
-            // console.log("loaded"+element);
-        //     var width  = element.width;
-        //     var height = element.height;
+            var maskCanvas = document.createElement("canvas");
+            var context = maskCanvas.getContext("2d");
+            console.log("loaded"+element);
+            var width  = element.width;
+            var height = element.height;
 
-        //     var mask = document.createElement('img');
-        //     mask.src = img.getAttribute('data-mask');
-        //     mask.onload = function() {
-        //     imagecanvas.width  = width;
-        //     imagecanvas.height = height;
-
-        //     imagecontext.drawImage(mask, 0, 0, width, height);
-        //     imagecontext.globalCompositeOperation = 'source-in';
-        //     imagecontext.drawImage(img, 0, 0);
-
-        //     img.src = imagecanvas.toDataURL();
-        //   }
+            var mask = document.createElement("img");
+            mask.src = element.getAttribute("data-mask");
+            mask.onload = function() {
+                maskCanvas.width  = width;
+                maskCanvas.height = height;
+                context.drawImage(mask, 0, 0, width, height);
+                context.globalCompositeOperation = 'source-in';
+                context.drawImage(element, 0, 0);
+                element.removeAttribute("onload");
+                element.src = maskCanvas.toDataURL();
+            }
         }
     </script>
 
@@ -445,6 +446,7 @@
                     if(item.id == params.get("phone")) {
                         phoneTitle.innerHTML = item.name;
                         phoneMask.setAttribute("src", "phone_outlines/ip_temp.png");
+                        phoneMask.setAttribute("phone-category", "ip"); //Temporary until all outlines/masks added
                         modelFound = true;
                     }
                 } else {
