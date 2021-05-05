@@ -10,14 +10,18 @@
     <link rel="stylesheet" href="custom_wraps_styles.css">
     <link rel="stylesheet" href="main_styles.css">
     <link rel="stylesheet" href="footer_styles.css">
+    <link rel="stylesheet" href="loading_animation.css">
     <link rel="shortcut icon" href="assets/site_icon.ico">
 </head>
 <body>
-    <div id="exportModal">
+    <div id="loadRingsContainer" class="hiddenModal">
+        <div class="lds-ring">loading...<div></div><div></div><div></div><div></div></div>
+    </div>
+    <div id="exportModal" class="hiddenModal">
         <img id="exportedImage" alt="exported image">
         <div id="buttonsContainer">
             <div><a onclick="hideModal()">BACK</a></div>
-            <div><a>DOWNLOAD</a></div>
+            <div><a id="downloadButton" download>DOWNLOAD</a></div>
             <!-- <div><a>BUY NOW</a></div> -->
         </div>
     </div>
@@ -51,7 +55,7 @@
             <h1 id="selectedPhoneName"></h1>
             <div id="customImageDiv">
                 <canvas id="uploadedImageCanvas"></canvas>
-                <img id="selectedPhoneMask" onclick="exportDiv()">
+                <img id="selectedPhoneMask">
             </div>
             <p>[Wrap Preview]</p>
         </div>
@@ -121,8 +125,13 @@
                         <input id="rotationSlider" class="adjustmentSlider" type="range" min="-180" max="180" value="0">
                     </div>
                 </div>
-
             </div>
+            <!-- Child 6: Confirm button -->
+            <div>
+                <span class="number">3.</span>
+                <a onclick="startLoad(true)">Confirm Design</a>
+            </div>
+            <!-- Child 7: Experiment -->
         </div>
     </div>
 
@@ -184,16 +193,29 @@
         function hideModal() {
             previewContainer.style.display = "none";
         }
-
     </script>
 
 
-    <!-- Export image? -->
-    <script src="canvasmask.js"></script>
+    <!-- Export image -->
     <script>
         var canvas = document.getElementById("uploadedImageCanvas");
+        var loadScreen = document.getElementById("loadRingsContainer");
+        
+        function startLoad(firstRun) {
+            if(firstRun) {
+                loadScreen.style.display = "flex";
+            }
+            if(getComputedStyle(loadScreen).display == "flex") {
+                setTimeout(() => {
+                    exportDiv();
+                }, 200);
+            } else {
+                startLoad(false);
+            }
+
+        }
         function exportDiv() {
-            console.log("export triggered");
+            // console.log("export triggered");
             var exportURL = canvas.toDataURL("image/png", 1);
             var exportIMG = document.getElementById("exportedImage"); //This will be an image in a hidden modal
             exportIMG.setAttribute("class", "mask");
@@ -208,6 +230,7 @@
 
         function maskImage(element) {
             var previewContainer = document.getElementById("exportModal");
+            var downloadButton = document.getElementById("downloadButton");
             var maskCanvas = document.createElement("canvas");
             var context = maskCanvas.getContext("2d");
             var width  = element.width;
@@ -222,7 +245,10 @@
                 context.globalCompositeOperation = 'source-in';
                 context.drawImage(element, 0, 0);
                 element.removeAttribute("onload");
-                element.src = maskCanvas.toDataURL();
+                var exportedURL = maskCanvas.toDataURL();
+                element.src = exportedURL;
+                downloadButton.setAttribute("href", exportedURL);
+                loadRingsContainer.style.display = "none";
                 previewContainer.style.display = "flex";
             }
         }
@@ -256,8 +282,10 @@
 
             // context.drawImage(mask, -canvasImage.width/2,-canvasImage.height/2, canvas.width, canvas.height);
             // context.globalCompositeOperation = 'source-in';
-
+            
             context.clearRect(0,0,canvas.width,canvas.height);
+            context.fillStyle = 'white';
+            context.fillRect(0,0,canvas.width, canvas.height);
             context.save();
             context.translate((canvas.width/2)+(xpos*scale*canvasImage.width),(canvas.height/2)+(ypos*scale*canvasImage.height));
             context.rotate(rotation*Math.PI/180);
@@ -492,7 +520,7 @@
 
         // Enable link if URL parameter present
         if(params.has("link")) {
-            console.log("link true")
+            console.log("link true");
             document.getElementById("linkDiv").style.display = "flex";
         }
 

@@ -39,6 +39,7 @@
 #uploadedImageCanvas {
     width: auto;
     height: 100%;
+    background-color: white;
 }
 #hiddenImage {
     position: absolute;
@@ -273,22 +274,59 @@ input.adjustmentSlider::-moz-range-thumb {
     margin-left: 20px;
     cursor: pointer;
 }
-#exportModal {
-    display: none;
+
+/* Child 6 */
+#selectorUIContainer > :nth-child(6) {
+    height: 70px;
+    margin-top: 30px;
+}
+#selectorUIContainer > :nth-child(6) a {
+    font-size: 30px;
+    margin-left: 10px;
+    padding: 12px;
+    text-decoration: none;
+    /* line-height: 1.6; */
+    white-space: nowrap;
+    color: white;
+    background-color: black;
+    cursor: pointer;
+    /* border-style: solid; */
+    border-color: white;
+    border-width: 2px;
+    transition: background-color 0.12s;
+}
+#selectorUIContainer > :nth-child(6) a:hover {
+    background-color: rgb(55, 55, 55);
+}
+.hiddenModal {
     position: fixed;
     width: 100%;
     height: 100vh;
-    padding: 40px 0 0 0;
     z-index: 10;
     top: 0;
     left: 0;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
     background-color: rgba(80, 80, 80, 0.7);
     backdrop-filter: blur(7px);
     overflow: hidden;
 }
+#exportModal {
+    display: none;
+    padding: 40px 0 0 0;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+#loadRingsContainer {
+    display: none;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+#loadRingsContainer > div {
+    color: white;
+    transform: scale(2);
+}
+
 #exportedImage {
     width: auto;
     height: 80%;
