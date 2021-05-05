@@ -219,6 +219,10 @@
     color: white;
     background-color: black;
     cursor: pointer;
+    transition: background-color 0.12s;
+}
+.textDiv a:hover {
+    background-color: rgb(60, 60, 60);
 }
 @media (max-width: 750px) {
     .parallaxContainer {

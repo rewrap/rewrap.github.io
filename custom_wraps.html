@@ -13,6 +13,15 @@
     <link rel="shortcut icon" href="assets/site_icon.ico">
 </head>
 <body>
+    <div id="exportModal">
+        <img id="exportedImage" alt="exported image">
+        <div id="buttonsContainer">
+            <div><a onclick="hideModal()">BACK</a></div>
+            <div><a>DOWNLOAD</a></div>
+            <!-- <div><a>BUY NOW</a></div> -->
+        </div>
+    </div>
+
     <!-- Nav bar -->
     <div id="navContainer">
         <img id="navLogo" src="ui_images/nav_logo.svg" alt="ReWrap Logo" onmousedown="redirect('index.html', event)">
@@ -168,6 +177,17 @@
         firebase.analytics();
     </script>
 
+
+    <!-- Preview modal functions -->
+    <script>
+        var previewContainer = document.getElementById("exportModal");
+        function hideModal() {
+            previewContainer.style.display = "none";
+        }
+
+    </script>
+
+
     <!-- Export image? -->
     <script src="canvasmask.js"></script>
     <script>
@@ -175,8 +195,7 @@
         function exportDiv() {
             console.log("export triggered");
             var exportURL = canvas.toDataURL("image/png", 1);
-            var exportIMG = document.createElement("img"); //This will be an image in a hidden modal
-            exportIMG.setAttribute("id", exportIMG);
+            var exportIMG = document.getElementById("exportedImage"); //This will be an image in a hidden modal
             exportIMG.setAttribute("class", "mask");
             exportIMG.setAttribute("src", exportURL);
             exportIMG.setAttribute("onload", "maskImage(this)");
@@ -185,13 +204,12 @@
             } else {
                 exportIMG.setAttribute("data-mask", "phone_masks/s_temp_mask.png");
             }
-            document.getElementById("footerContainer").appendChild(exportIMG);
         }
 
         function maskImage(element) {
+            var previewContainer = document.getElementById("exportModal");
             var maskCanvas = document.createElement("canvas");
             var context = maskCanvas.getContext("2d");
-            console.log("loaded"+element);
             var width  = element.width;
             var height = element.height;
 
@@ -205,6 +223,7 @@
                 context.drawImage(element, 0, 0);
                 element.removeAttribute("onload");
                 element.src = maskCanvas.toDataURL();
+                previewContainer.style.display = "flex";
             }
         }
     </script>

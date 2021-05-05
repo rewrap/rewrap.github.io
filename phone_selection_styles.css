@@ -39,6 +39,7 @@
 .phoneImageContainer img {
     border-radius: 15px;
     width: 120px;
+    transition: box-shadow 0.12s;
 }
 .phoneImageContainer span {
     font-family: AppleGothicNeo, sans-serif;
