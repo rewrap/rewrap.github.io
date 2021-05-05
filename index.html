@@ -161,12 +161,10 @@
                 element.style.borderBottomColor = "var(--specialGreen)";
                 element.firstChild.style.color = "var(--specialGreen)";
                 element.firstChild.style.fontWeight = "600";
-                element.firstChild.style.cursor = "default";
             } else {
                 element.style.borderBottomColor = "#1A1A1A";
                 element.firstChild.style.color = "white";
                 element.firstChild.style.fontWeight = "500";
-                element.firstChild.style.cursor = "pointer";
             }
 
         }
@@ -175,29 +173,37 @@
             var li = document.getElementById("whatnewLI");
             if(isInViewport(document.getElementById("whatnewText"))) {
                 changeStyle(li, true);
+                li.firstChild.setAttribute("href", "new.html");
             } else {
                 changeStyle(li, false);
+                li.firstChild.removeAttribute("href");
             }
 
             li = document.getElementById("customLI");
             if(isInViewport(document.getElementById("customText"))) {
                 changeStyle(li, true);
+                li.firstChild.setAttribute("href", "phone_selection.html?type=custom");
             } else {
                 changeStyle(li, false);
+                li.firstChild.removeAttribute("href");
             }
 
             li = document.getElementById("presetsLI");
             if(isInViewport(document.getElementById("presetsText"))) {
                 changeStyle(li, true);
+                li.firstChild.setAttribute("href", "phone_selection.html?type=presets");
             } else {
                 changeStyle(li, false);
+                li.firstChild.removeAttribute("href");
             }
 
             li = document.getElementById("stickersLI");
             if(isInViewport(document.getElementById("stickersText"))) {
                 changeStyle(li, true);
+                li.firstChild.setAttribute("href", "stickers.html");
             } else {
                 changeStyle(li, false);
+                li.firstChild.removeAttribute("href");
             }
         }
 
