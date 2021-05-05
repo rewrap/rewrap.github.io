@@ -21,7 +21,7 @@
         <img id="exportedImage" alt="exported image">
         <div id="buttonsContainer">
             <div><a onclick="hideModal()">BACK</a></div>
-            <div><a id="downloadButton" download>DOWNLOAD</a></div>
+            <div><a id="downloadButton" onmouseover="setHREF(this, true)" onmouseleave="setHREF(this, false)" download>DOWNLOAD</a></div>
             <!-- <div><a>BUY NOW</a></div> -->
         </div>
     </div>
@@ -189,9 +189,20 @@
 
     <!-- Preview modal functions -->
     <script>
+        // Close container
         var previewContainer = document.getElementById("exportModal");
         function hideModal() {
             previewContainer.style.display = "none";
+        }
+
+        // Add and remove HREF to try reduce lag
+        var exportedImage = document.getElementById("exportedImage");
+        function setHREF(element, addURL) {
+            if(addURL) {
+                element.setAttribute("href", exportedImage.src);
+            } else {
+                element.removeAttribute("href");
+            }
         }
     </script>
 
@@ -247,7 +258,6 @@
                 element.removeAttribute("onload");
                 var exportedURL = maskCanvas.toDataURL();
                 element.src = exportedURL;
-                downloadButton.setAttribute("href", exportedURL);
                 loadRingsContainer.style.display = "none";
                 previewContainer.style.display = "flex";
             }
