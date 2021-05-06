@@ -79,6 +79,7 @@
                         "<link rel=\"stylesheet\" href=\"custom_wraps_styles.css\" />");
                     document.getElementById("customLI").firstChild.setAttribute("href", "javascript:void(0)");
                 } else if(params.get("type") == "presets") {
+                    redirect("preset_wraps.html");
                     document.getElementsByTagName("head")[0].insertAdjacentHTML(
                         "beforeend",
                         "<link rel=\"stylesheet\" href=\"preset_wraps_styles.css\" />");

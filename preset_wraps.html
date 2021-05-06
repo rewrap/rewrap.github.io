@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReWrap | Preset Wraps</title>
+    <link rel="stylesheet" href="variables.css">
+    <link rel="stylesheet" href="nav_styles.css">
+    <link rel="stylesheet" href="preset_wraps_styles.css">
+    <link rel="stylesheet" href="main_styles.css">
+    <link rel="stylesheet" href="footer_styles.css">
+    <link rel="shortcut icon" href="assets/site_icon.ico">
+</head>
+<body onload="changeImage()" onresize="changeImage()">
+    <!-- Nav bar -->
+    <div id="navContainer">
+        <img id="navLogo" src="ui_images/nav_logo.svg" alt="ReWrap Logo" onmousedown="redirect('index.html', event)">
+        <ul>
+            <li id="whatnewLI"><a href="new.html">What's New</a></li>
+            <li id="customLI"><a href="phone_selection.html?type=custom">Custom</a></li>
+            <li id="presetsLI"><a href="phone_selection.html?type=presets">Presets</a></li>
+            <li id="stickersLI"><a href="stickers.html">Stickers</a></li>
+        </ul>
+        <div id="helpIcon" onmousedown="redirect('help.html', event)"><p>?</p></div>
+    </div>
+
+    <!-- Placeholder Images -->
+    <img id="desktopPlaceholder" class="placeholderImage" src="assets/presets_desktop_view.png" alt="coming soon placeholder image">
+    <img id="mobilePlaceholder" class="placeholderImage" src="assets/presets_phone_view.png" alt="coming soon placeholder image">
+
+    <!-- Footer -->
+    <div id="footerContainer">
+        <div id="footerSocials">
+            <h1>Our Socials: </h1>
+            <div>
+                <a href="https://www.instagram.com/rewrap_nz/" target="_blank" rel="noreferrer noopener" title="@rewrap_nz">
+                    <img src="ui_images/instagram_logo.svg" alt="Intagram Logo">
+                </a>
+                <a onclick="emailPrompt()" title="rewrapvinyl@gmail.com">
+                    <img src="ui_images/mail_icon.svg" alt="Mail Icon">
+                </a>
+            </div>
+            <input type="text" value="rewrapvinyl@gmail.com" id="hiddenEmail" readonly>
+        </div>
+    </div>
+
+    <!--#########-->
+    <!-- Scripts -->
+    <!--#########-->
+
+    <script src=global_functions.js></script>
+
+
+    <script>
+        var desktopPlaceholder = document.getElementById("desktopPlaceholder");
+        var mobilePlaceholder = document.getElementById("mobilePlaceholder");
+        
+        function changeImage() {
+            var w = window.innerWidth;
+            var h = window.innerHeight;
+            if(w > h) {
+                desktopPlaceholder.style.display = "block";
+                mobilePlaceholder.style.display = "none";
+            } else {
+                desktopPlaceholder.style.display = "none";
+                mobilePlaceholder.style.display = "block";
+            }
+        }
+    </script>
+
+</body>

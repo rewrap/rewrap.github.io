@@ -1,7 +1,7 @@
-#presetsLI {
+#stickersLI {
     border-bottom-color: var(--specialGreen);
 }
-#presetsLI a {
+#stickersLI a {
     font-weight: 600;
     color: var(--specialGreen);
 }

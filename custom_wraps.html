@@ -322,7 +322,7 @@
                 });
             } catch(error) {
                 console.log("Attempted to load "+imageData);
-                console.log(error);
+                console.log("Error: "+ error);
                 window.alert("Image uploading does not work on Safari, please use Chrome");
                 canvasImage = imageData;
                 updateImage();
