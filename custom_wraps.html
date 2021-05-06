@@ -70,7 +70,7 @@
             <!-- Child 2: Upload image box -->
             <div>
                 <label for="fileField"><img id="uploadButton" src="ui_images/cloud_icon.svg" title="Upload Image"></label>
-                <input type="file" name="fileField" id="fileField" accept="image/png, image/jpeg" oninput ="generateCanvas(this.files[0], true)">
+                <input type="file" name="fileField" id="fileField" accept="image/*" oninput ="generateCanvas(this.files[0], true)">
             </div>
             <!-- Child 3: Link image box (Disabled due to CORS errors) -->
             <div id="linkDiv">
@@ -310,15 +310,23 @@
                 document.getElementById("linkBox").value = "";
             }
             // Generate canvas based on image data
-            createImageBitmap(imageData).then(function(response) {
-                var containerSize = document.getElementById("selectedPhoneMask").getBoundingClientRect();
-                var canvasHeight= response.height+"px";
-                var canvasWidth = response.height*(containerSize.width/containerSize.height)+"px";
-                uploadedImageCanvas.setAttribute("height", canvasHeight);
-                uploadedImageCanvas.setAttribute("width", canvasWidth);
-                canvasImage = response;
+            try {
+                createImageBitmap(imageData).then(function(response) {
+                    var containerSize = document.getElementById("selectedPhoneMask").getBoundingClientRect();
+                    var canvasHeight= response.height+"px";
+                    var canvasWidth = response.height*(containerSize.width/containerSize.height)+"px";
+                    uploadedImageCanvas.setAttribute("height", canvasHeight);
+                    uploadedImageCanvas.setAttribute("width", canvasWidth);
+                    canvasImage = response;
+                    updateImage();
+                });
+            } catch(error) {
+                console.log("Attempted to load "+imageData);
+                console.log(error);
+                window.alert("Image uploading does not work on Safari, please use Chrome");
+                canvasImage = imageData;
                 updateImage();
-            });
+            }
         }
     </script>
     
