@@ -13,6 +13,7 @@
 #showcaseBackground img {
     margin-left: 2vw;
     align-self: center;
+    width: auto;
     height: 70vh;
 }
 .transparentIMG {
