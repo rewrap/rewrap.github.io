@@ -34,19 +34,19 @@
     overflow: hidden;
 }
 #newsContainer > :nth-child(odd) > div, #newsContainer > :nth-child(even) > div > .text {
-    -webkit-transform: skewY(-3deg);
-    -moz-transform: skewY(-3deg);
-    -o-transform: skewY(-3deg);
-    transform: skewY(-3deg);
+    -webkit-transform: skewY(-5deg);
+    -moz-transform: skewY(-5deg);
+    -o-transform: skewY(-5deg);
+    transform: skewY(-5deg);
 }
 #newsContainer > :nth-child(odd) > div > .image {
     background-position: 0% 50%;
 }
 #newsContainer > :nth-child(even) > div, #newsContainer > :nth-child(odd) > div > .text {
-    -webkit-transform: skewY(3deg);
-    -moz-transform: skewY(3deg);
-    -o-transform: skewY(3deg);
-    transform: skewY(3deg);
+    -webkit-transform: skewY(5deg);
+    -moz-transform: skewY(5deg);
+    -o-transform: skewY(5deg);
+    transform: skewY(5deg);
 }
 #newsContainer > :nth-child(even) > div > .image {
     background-position: 100% 0%;
