@@ -21,7 +21,10 @@
 .skewContainer:first-child {
     margin-top: 0px;
 }
-/* Skewed element */
+.skewContainer:last-child {
+    margin-bottom: 0px;
+}
+/* Skewed elements */
 .skewedChild {
     display: flex;
     width: 100%;
@@ -30,44 +33,110 @@
     border-top-style: solid;
     border-bottom-style: solid;
     border-width: 30px;
-    background-color: grey;
+    background-color: #e0e0e0;
     overflow: hidden;
 }
-#newsContainer > :nth-child(odd) > div, #newsContainer > :nth-child(even) > div > .text {
+#newsContainer > :nth-child(odd) > div, #newsContainer > :nth-child(even) > div > .textContainer {
     -webkit-transform: skewY(-5deg);
     -moz-transform: skewY(-5deg);
     -o-transform: skewY(-5deg);
     transform: skewY(-5deg);
 }
-#newsContainer > :nth-child(odd) > div > .image {
+#newsContainer > :nth-child(odd) > div > .image::before {
     background-position: 0% 50%;
-}
-#newsContainer > :nth-child(even) > div, #newsContainer > :nth-child(odd) > div > .text {
     -webkit-transform: skewY(5deg);
     -moz-transform: skewY(5deg);
     -o-transform: skewY(5deg);
     transform: skewY(5deg);
 }
-#newsContainer > :nth-child(even) > div > .image {
-    background-position: 100% 0%;
+#newsContainer > :nth-child(even) > div, #newsContainer > :nth-child(odd) > div > .textContainer {
+    -webkit-transform: skewY(5deg);
+    -moz-transform: skewY(5deg);
+    -o-transform: skewY(5deg);
+    transform: skewY(5deg);
 }
-/* Content */
-.skewedChild div {
+#newsContainer > :nth-child(even) > div > .image::before {
+    background-position: 100% 0%;
+    -webkit-transform: skewY(-5deg);
+    -moz-transform: skewY(-5deg);
+    -o-transform: skewY(-5deg);
+    transform: skewY(-5deg);
+}
+
+/* Content divs */
+.skewedChild > div {
     width: 50%;
     height: 100%;
 }
-.text {
-    padding: 20px;
-    background-color: pink;
+
+/* Text */
+.textContainer {
+    padding: 25px;
 }
-.text h1 {
-    display: block;
-    margin: 5px auto 5px auto;
-    text-align: center;
+.headingDiv {
+    display: flex;
+    justify-content: center;
 }
-.image {
-    background-image: url(ui_images/product_image_temp2.jpg);
+.headingDiv span {
+    font-size: 50px;
+    padding: 10px;
+    white-space: nowrap;
+    font-family: Timeburner, sans-serif;;
+    color: var(--specialGreen);
+    background-color: black;
+    box-shadow: 10px 10px #2A2A2A;
+}
+.textDiv::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    left: -25px;
+    color: black;
+    border-left-style: solid;
+    border-width: 10px;
+
+}
+.textDiv {
+    position: relative;
+    height: 75%;
+    margin: 25px 0 0 20px;
+    padding-left: 20px;
+    color: black;
+    border-left-style: solid;
+    border-width: 6px;
+}
+.textDiv p {
+    display: inline;
+    padding: 6px;
+    line-height: 1.8;
+    font-size: 25px;
+    color: white;
+    background-color: black;
+}
+
+
+
+.image::before {
+    position: absolute;
+    content: "";
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+    z-index: -1;
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: 50% auto;
+}
+.image {
+    position: relative;
+}
+#image1::before {
+    background-image: url(ui_images/product_image_temp2.jpg);
+}
+#image2::before {
+    background-image: url(ui_images/product_image_temp1.jpg);
 }
