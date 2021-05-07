@@ -7,16 +7,23 @@
 }
 #newsContainer {
     width: 100%;
-    background-color: var(--specialGrey);
+    background-color: #242424;
+    /* background-color: var(--specialGrey); */
 }
 /* Skew container */
 .skewContainer {
     display: flex;
     width: 100%;
     height: auto;
-    margin: -20px 0 -20px 0;
+    margin: -30px 0 -30px 0;
     justify-content: center;
     align-items: center;
+}
+.skewContainer :nth-child(odd) {
+    flex-wrap: wrap-reverse;
+}
+.skewContainer :nth-child(even) {
+    flex-wrap: wrap;
 }
 .skewContainer:first-child {
     margin-top: 0px;
@@ -28,13 +35,23 @@
 .skewedChild {
     display: flex;
     width: 100%;
-    height: 700px;
+    height: 820px;
     flex-direction: row;
+    color: var(--specialBlack);
     border-top-style: solid;
     border-bottom-style: solid;
-    border-width: 30px;
-    background-color: #e0e0e0;
+    border-width: 50px;
+    background-color: #ECECEC;
     overflow: hidden;
+
+    /* antialiasing */
+    outline: 1px solid transparent;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    will-change: transform;
+    -webkit-perspective: 1000;
+    perspective: 1000;
 }
 #newsContainer > :nth-child(odd) > div, #newsContainer > :nth-child(even) > div > .textContainer {
     -webkit-transform: skewY(-5deg);
@@ -68,10 +85,23 @@
     width: 50%;
     height: 100%;
 }
-
+/* @media (max-width: 1100px) {
+    .skewedChild {
+        height: auto;
+    }
+    .skewedChild > div {
+        width: 100vw;
+    }
+    .textContainer {
+        height: auto;
+    }
+    .image {
+        height: 600px;
+    }
+} */
 /* Text */
 .textContainer {
-    padding: 25px;
+    padding: 50px 20px 20px 20px;
 }
 .headingDiv {
     display: flex;
@@ -83,8 +113,9 @@
     white-space: nowrap;
     font-family: Timeburner, sans-serif;;
     color: var(--specialGreen);
-    background-color: black;
+    background-color: var(--specialBlack);
     box-shadow: 10px 10px #2A2A2A;
+    cursor: text;
 }
 .textDiv::before {
     content: "";
@@ -93,17 +124,16 @@
     width: 100%;
     height: 100%;
     left: -25px;
-    color: black;
+    color: var(--specialBlack);
     border-left-style: solid;
     border-width: 10px;
-
 }
 .textDiv {
     position: relative;
     height: 75%;
     margin: 25px 0 0 20px;
     padding-left: 20px;
-    color: black;
+    color: var(--specialBlack);
     border-left-style: solid;
     border-width: 6px;
 }
@@ -113,9 +143,11 @@
     line-height: 1.8;
     font-size: 25px;
     color: white;
-    background-color: black;
+    background-color: var(--specialBlack);
 }
-
+.textDiv a {
+    color: var(--specialGreen);
+}
 
 
 .image::before {

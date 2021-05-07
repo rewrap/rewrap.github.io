@@ -66,7 +66,7 @@
     text-align: center;
     color: white;
 }
-@media (max-width: 1100px) {
+@media (max-width: 800px) {
     #showcaseText h1 {
     font-size: 20vw;
 }
@@ -74,7 +74,6 @@
     font-size: 5vw;
 }
 }
-
 
 /* Company info styles //////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 #companyInfoContainer { /* Container that holds info sections */
@@ -143,7 +142,7 @@
         max-height: 100%;
     }
 }
-@media (max-width: 750px) {
+@media (max-width: 1000px) {
     .infoSection h2 {
         font-size: 30px;
     }
@@ -225,7 +224,7 @@
 .textDiv a:hover {
     background-color: rgb(60, 60, 60);
 }
-@media (max-width: 750px) {
+@media (max-width: 1100px) {
     .parallaxContainer {
         height: auto;
     }
