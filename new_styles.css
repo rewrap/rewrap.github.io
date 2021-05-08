@@ -155,7 +155,7 @@
     background-image: url(assets/website_launch_image.png);
 }
 #image2::before {
-    background-image: url(ui_images/product_image_temp1.jpg);
+    background-image: url(assets/upcoming_releases.png);
 }
 
 @media (max-width: 1150px) {

@@ -16,7 +16,7 @@
     transition: max-height 0.3s ease-in-out;
 }
 .extendedHeight {
-    max-height: 600px;
+    max-height: 700px;
 }
 /* Topic title */
 .helpTitle {
@@ -64,6 +64,11 @@
     font-size: 20px;
     color: white;
 }
+.helpcontent a {
+    text-decoration: underline;
+    color: var(--specialGreen);
+    cursor: pointer;
+}
 .helpcontent pre {
     color: white;
     margin: 0;
@@ -77,5 +82,8 @@
     }
     .helpcontent p {
         font-size: 16px;
+    }
+    .extendedHeight {
+        max-height: 1400px;
     }
 }

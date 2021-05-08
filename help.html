@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="footer_styles.css">
     <link rel="shortcut icon" href="assets/site_icon.ico">
 </head>
-<body>
+<body onload="expandHelpOne()">
     <!-- Nav bar -->
     <div id="navContainer">
         <img id="navLogo" src="ui_images/nav_logo.svg" alt="ReWrap Logo" onmousedown="redirect('index.html', event)">
@@ -50,12 +50,41 @@
         </div>
         <div class="helpTopicContainer">
             <div class="helpTitle">
+                <h1 onclick="extendTopic(this)">How much is a custom wrap?</h1>
+                <span>></span>
+            </div>
+            <div class="helpcontent">
+                <p>- Custom wrap: $10</p>
+                <br>
+                <p>- Clear case: $7</p>
+                <br>
+                <p>- Custom wrap + clear case bundle: $15</p>
+                <br>
+                <p>- Shipping: <strong>Free shipping</strong> anywhere in New Zealand.</p>
+            </div>
+        </div>
+        <div class="helpTopicContainer">
+            <div class="helpTitle">
                 <h1 onclick="extendTopic(this)">How can I purchase a custom wrap?</h1>
                 <span>></span>
             </div>
             <div class="helpcontent">
-                <p>
-                </p>
+                <p>1. Create your wrap using the tool on the <a href="phone_selection.html?type=custom">custom wraps page</a>.</p>
+                <br>
+                <p>2. Download the image produced from clicking confirm design.</p>
+                <br>
+                <p>3. Send an email to <a onclick="emailPrompt()" title="rewrapvinyl@gmail.com">rewrapvinyl@gmail.com</a> and attach
+                    the downloaded image. Please include name and applicable order details:</p>
+                <br>
+                <p>&#160;&#160;&#160;- Wrap or wrap+case bundle.</p>
+                <br>
+                <p>&#160;&#160;&#160;- Form class for wrap to be delivered to (if Kingsway school student).</p>
+                <br>
+                <p>&#160;&#160;&#160;- Address for wrap to be shipped to (if buying from outside Kingsway, bank details will be sent afterwards).</p>
+                <br>
+                <p>&#160;&#160;&#160;- Preferred payment method if picking up in person (bank or cash).</p>
+                <br><br>
+                <p>Each custom wrap takes time to produce, so please allow for up to two weeks to receive your product.</p>
             </div>
         </div>
         <div class="helpTopicContainer">
@@ -64,7 +93,17 @@
                 <span>></span>
             </div>
             <div class="helpcontent">
-                <p>
+                <p>Online payment terminal coming soon. Buy me a coffee to speed up the process :)</p>
+            </div>
+        </div>
+        <div class="helpTopicContainer">
+            <div class="helpTitle">
+                <h1 onclick="extendTopic(this)">What happens if I want to remove the wrap?</h1>
+                <span>></span>
+            </div>
+            <div class="helpcontent">
+                <p>Unlike normal stickers, vinyl is specially designed to leave no residue when peeled. Rest assured that
+                    your glossy glass phone will retain it's finish if you even choose to remove one of our wraps.
                 </p>
             </div>
         </div>
@@ -112,13 +151,14 @@
     <script>
         function extendTopic(element) {
             var topicParent = element.parentNode.parentNode
-            if(topicParent.classList.contains("extendedHeight")) {
-                console.log("removingExtentd");
-                topicParent.classList.remove("extendedHeight");
-            } else {
-                console.log("addingExtend");
-                topicParent.classList.add("extendedHeight");
-            }
+            topicParent.classList.toggle("extendedHeight");
+        }
+        function expandHelpOne() {
+            var element = document.getElementById("questionsContainer").firstElementChild;
+            console.log(element);
+            setTimeout(() => {
+                element.classList.add("extendedHeight");
+            }, 500);
         }
     </script>
 
