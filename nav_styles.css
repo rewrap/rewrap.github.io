@@ -55,6 +55,9 @@
 #navContainer a:hover {
     font-weight: 600;
 }
+#navContainer a::selection {
+    background: transparent;
+}
 #helpIcon {
     display: flex;
     position: absolute;

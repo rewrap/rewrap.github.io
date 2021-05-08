@@ -53,6 +53,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    cursor: default;
 }
 #showcaseText h1 {
     font-size: 10vw;
@@ -65,6 +66,9 @@
     font-size: 2.5vw;
     text-align: center;
     color: white;
+}
+#showcaseText h1::selection, #showcaseText p::selection {
+    background: rgba(0, 0, 0, 0.4);
 }
 @media (max-width: 800px) {
     #showcaseText h1 {
