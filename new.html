@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="footer_styles.css">
     <link rel="shortcut icon" href="assets/site_icon.ico">
 </head>
-<body onload="correctBoxes()">
+<body onload="correctBoxes()" onresize="correctBoxes()">
     <!-- Nav bar -->
     <div id="navContainer">
         <img id="navLogo" src="ui_images/nav_logo.svg" alt="ReWrap Logo" onmousedown="redirect('index.html', event)">
@@ -27,7 +27,7 @@
 
     <!-- Sub-Nav -->
     <div id="subNav">
-        <span id="subNavHeading">>>&#160</span><span>News and upcoming releases</span>
+        <span id="subNavHeading">>>&#160;</span><span>News and upcoming releases</span>
     </div>
 
     <!-- Content -->
@@ -63,9 +63,13 @@
                 <div class="textContainer">
                     <div class="headingDiv"><span>Upcoming Releases</span></div>
                     <div class="textDiv">
-                        <p>We've launched our custom wraps with limitless possibilities. However, in the near future we will be
-                            offering a variety of preset wraps, ranging from coloured carbon fibre to specially made
-                            preset designs.
+                        <p>In the near future we will be offering a variety of preset wraps, ranging from coloured
+                            carbon fibre to specially crafted designs. Stay tuned for more!
+                        </p>
+                        <br><br>
+                        <p>
+                            Not a fan of phone wraps? Soon enough you'll be able to get laptop stickers instead. Made from the same
+                            material as our premium wraps, they'll be equally as durable and customisable to any shape an size.
                         </p>
                     </div>
                 </div>
@@ -103,7 +107,7 @@
 
     <script src=global_functions.js></script>
 
-
+    <!-- Correct height of skewed div parents -->
     <script>
         function correctBoxes() {
             var skewContainers = document.getElementsByClassName("skewContainer");
@@ -113,6 +117,19 @@
                 var adjustedHeight = skewedChildren[i].getBoundingClientRect().height + "px";
                 skewContainers[i].style.height = adjustedHeight;
             }
+        }
+    </script>
+
+    <!-- Disable parallax on iOS -->
+    <script>
+        const root = document.querySelector(":root");
+        var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+
+        if (isIOS) {
+            root.style.setProperty("--attachment", "scroll");
+            root.style.setProperty("--backgroundSize", "100%");
+        } else {
+            // Do nothing
         }
     </script>
 

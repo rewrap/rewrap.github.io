@@ -6,6 +6,8 @@
 
     /* Misc */
     --brightness: 50%;
+    --attachment: fixed;
+    --backgroundSize: 50%;
 
     /* Custom wrap settings */
     --source: url("");
