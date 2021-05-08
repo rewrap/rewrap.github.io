@@ -55,15 +55,6 @@
 #navContainer a:hover {
     font-weight: 600;
 }
-#cartIcon {
-    position: absolute;
-    right: 0;
-    z-index: 1;
-    width: auto;
-    height: 40%;
-    margin: 0 25px 0 0;
-    cursor: pointer;
-}
 #helpIcon {
     display: flex;
     position: absolute;

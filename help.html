@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReWrap | Help</title>
+    <link rel="stylesheet" href="variables.css">
+    <link rel="stylesheet" href="nav_styles.css">
+    <link rel="stylesheet" href="help_styles.css">
+    <link rel="stylesheet" href="main_styles.css">
+    <link rel="stylesheet" href="footer_styles.css">
+    <link rel="shortcut icon" href="assets/site_icon.ico">
+</head>
+<body>
+    <!-- Nav bar -->
+    <div id="navContainer">
+        <img id="navLogo" src="ui_images/nav_logo.svg" alt="ReWrap Logo" onmousedown="redirect('index.html', event)">
+        <ul>
+            <li id="whatnewLI"><a href="new.html">What's New</a></li>
+            <li id="customLI"><a href="phone_selection.html?type=custom">Custom</a></li>
+            <li id="presetsLI"><a href="phone_selection.html?type=presets">Presets</a></li>
+            <li id="stickersLI"><a href="stickers.html">Stickers</a></li>
+        </ul>
+        <div id="helpIcon" onmousedown="redirect('help.html', event)"><p>?</p></div>
+    </div>
+
+    <!-- Sub-Nav -->
+    <div id="subNav">
+        <span id="subNavHeading">>>&#160;</span><span>Questions we think you might ask</span>
+    </div>
+    
+    <!-- Help FAQ -->
+    <div id="questionsContainer">
+        <div class="helpTopicContainer">
+            <div class="helpTitle">
+                <h1 onclick="extendTopic(this)">What is a vinyl wrap?</h1>
+                <span>></span>
+            </div>
+            <div class="helpcontent">
+                <p>Compared to a case, which adds bulk to your phone, a wrap is a removable vinyl sticker that
+                    attaches directly to the back of your device. Our wraps are fully customisable to feature any
+                    design you could image, unlike most cases, which are limited to whatever is availible in stores.
+                </p>
+                <br>
+                <p>Each custom wrap is produced with a unique two-layer design. A layer of printed vinyl displays your
+                    chosen image, with a clear coat layer sealing the ink for a durable finish.
+                </p>
+            </div>
+        </div>
+        <div class="helpTopicContainer">
+            <div class="helpTitle">
+                <h1 onclick="extendTopic(this)">How can I purchase a custom wrap?</h1>
+                <span>></span>
+            </div>
+            <div class="helpcontent">
+                <p>
+                </p>
+            </div>
+        </div>
+        <div class="helpTopicContainer">
+            <div class="helpTitle">
+                <h1 onclick="extendTopic(this)">When will I be able to make a purchase online?</h1>
+                <span>></span>
+            </div>
+            <div class="helpcontent">
+                <p>
+                </p>
+            </div>
+        </div>
+        <div class="helpTopicContainer">
+            <div class="helpTitle">
+                <h1 onclick="extendTopic(this)">Example question?</h1>
+                <span>></span>
+            </div>
+            <div class="helpcontent">
+                <p>Example answer
+                </p>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sub-Footer -->
+    <div id="subFooter">
+        <span onclick="backToTop()">Back to top ▲</span>
+    </div>
+
+    <!-- Footer -->
+    <div id="footerContainer">
+        <div id="footerSocials">
+            <h1>Our Socials: </h1>
+            <div>
+                <a href="https://www.instagram.com/rewrap_nz/" target="_blank" rel="noreferrer noopener" title="@rewrap_nz">
+                    <img src="ui_images/instagram_logo.svg" alt="Intagram Logo">
+                </a>
+                <a onclick="emailPrompt()" title="rewrapvinyl@gmail.com">
+                    <img src="ui_images/mail_icon.svg" alt="Mail Icon">
+                </a>
+            </div>
+            <input type="text" value="rewrapvinyl@gmail.com" id="hiddenEmail" readonly>
+        </div>
+    </div>
+
+    <!--#########-->
+    <!-- Scripts -->
+    <!--#########-->
+
+    <script src=global_functions.js></script>
+
+
+    <!-- Extend divs -->
+    <script>
+        function extendTopic(element) {
+            var topicParent = element.parentNode.parentNode
+            if(topicParent.classList.contains("extendedHeight")) {
+                console.log("removingExtentd");
+                topicParent.classList.remove("extendedHeight");
+            } else {
+                console.log("addingExtend");
+                topicParent.classList.add("extendedHeight");
+            }
+        }
+    </script>
+
+</body>
