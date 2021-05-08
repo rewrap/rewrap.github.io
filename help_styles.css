@@ -64,6 +64,12 @@
     font-size: 20px;
     color: white;
 }
+.helpcontent pre {
+    color: white;
+    margin: 0;
+    font-size: 300px;
+    font-weight: 700;
+}
 
 @media (max-width: 600px) {
     .helpTitle h1 {
