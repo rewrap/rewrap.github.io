@@ -282,7 +282,6 @@ input.adjustmentSlider::-moz-range-thumb {
 }
 #selectorUIContainer > :nth-child(6) a {
     font-size: 30px;
-    margin-left: 10px;
     padding: 12px;
     text-decoration: none;
     /* line-height: 1.6; */
@@ -357,4 +356,52 @@ input.adjustmentSlider::-moz-range-thumb {
 }
 #buttonsContainer a:hover {
     background-color: rgb(55, 55, 55);
+}
+@media (max-width: 900px) {
+    #phoneBackContainer {
+        width: 300px;
+        height: 700px;
+    }
+    /* White container */
+    #selectorUIContainer {
+        width: 92%;
+        height: auto;
+        padding: 20px 7px 20px 7px;
+    }
+    /* Main titles */
+    #selectorUIContainer .heading {
+        font-size: 22px;
+    }
+    /* Upload image box */
+    #selectorUIContainer > :nth-child(1) {
+        height: 90px;
+    }
+    /* Controls UI box */
+    #selectorUIContainer > :nth-child(5) {
+        margin-top: 20px;
+        width: 98%;
+        height: auto;
+    }
+    /* Box with each category */
+    #controlsUIContainer > div {
+    margin: 20px 0 50px 0;
+    color: white;
+    }
+    /* Titles */
+    #controlsUIContainer .adjustmentTitle {
+        font-size: 18px;
+    }
+    /* Scale category sizing fudge */
+    #controlsUIContainer > div:first-child > span:first-child {
+        margin-right: 40px;
+    }
+    /* Sliders */
+    #controlsUIContainer div div {
+        /* margin: 0 20px 0 100px; */
+        width: 90%;
+    }
+    /* Confirm button box */
+    #selectorUIContainer > :nth-child(6) {
+        height: 100px;
+    }
 }
