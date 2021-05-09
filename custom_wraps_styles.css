@@ -306,7 +306,7 @@ input.adjustmentSlider::-moz-range-thumb {
     left: 0;
     background-color: rgba(80, 80, 80, 0.7);
     backdrop-filter: blur(7px);
-    overflow: hidden;
+    overflow-x: hidden;
 }
 #exportModal {
     display: none;
@@ -326,10 +326,33 @@ input.adjustmentSlider::-moz-range-thumb {
     transform: scale(2);
 }
 
-#exportedImage {
+#exportedImageDIV {
+    display: flex;
+    flex-wrap: wrap-reverse;
+    justify-content: center;
     width: auto;
     height: 80%;
     /* box-shadow: 0 0 20px pink; */
+}
+#purchaseInstructions {
+    max-width: 700px;
+    margin: 30px;
+    padding: 15px;
+    background-color: white;
+    border-radius: 20px;
+}
+#purchaseInstructions h1 {
+    font-size: 35px;
+}
+#purchaseInstructions p, #purchaseInstructions strong {
+    font-size: 18px;
+}
+#purchaseInstructions a {
+    text-decoration: underline;
+    cursor: pointer;
+}
+#exportedImageDIV img {
+    height: 100%;
 }
 #buttonsContainer {
     display: flex;

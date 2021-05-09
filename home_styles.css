@@ -186,16 +186,20 @@
     background-size: 50% auto;
 }
 #imgDiv1 {
-    background-image: url(ui_images/product_image_temp1.jpg);
+    /* What's new */
+    background-image: url(ui_images/product_image_newV1.png);
 }
 #imgDiv2 {
-    background-image: url(ui_images/product_image_temp2V2.jpg);
+    /* Custom wraps */
+    background-image: url(ui_images/product_image_custom.jpg);
 }
 #imgDiv3 {
+    /* Preset wraps */
     background-image: url(ui_images/product_image_temp3.jpg);
 }
 #imgDiv4 {
-    background-image: url(ui_images/product_image_temp4.jpg);
+    /* Stickers */
+    background-image: url(assets/stickers_phone_view.png);
 }
 .textDiv {
     display: flex;

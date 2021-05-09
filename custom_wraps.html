@@ -18,7 +18,23 @@
         <div class="lds-ring">loading...<div></div><div></div><div></div><div></div></div>
     </div>
     <div id="exportModal" class="hiddenModal">
-        <img id="exportedImage" alt="exported image">
+        <div id="exportedImageDIV">
+            <div id="purchaseInstructions">
+                <h1>Purchase Instructions</h1>
+                <strong>Custom wraps are $10 each or $15 with a wrap+case bundle.</strong>
+                <p>1. Download your custom wrap with the button below.</p>
+                <p>2. Send an email to <a onclick="emailPrompt()" title="rewrapvinyl@gmail.com">rewrapvinyl@gmail.com</a> and attach
+                    the downloaded image. Please include name and applicable order details:</p>
+                <ul>
+                    <li>Wrap or wrap+case bundle.</li>
+                    <li>Form class for wrap to be delivered to (if Kingsway school student).</li>
+                    <li>Address for wrap to be shipped to (if buying from outside Kingsway, bank details will be sent afterwards).</li>
+                    <li>Preferred payment method if picking up in person (bank or cash).</li>
+                </ul>
+                <p>Each custom wrap takes time to produce, so please allow for up to two weeks to receive your product.</p>
+            </div>
+            <img id="exportedImage" alt="exported image">
+        </div>
         <div id="buttonsContainer">
             <div><a onclick="hideModal()">BACK</a></div>
             <div><a id="downloadButton" onmouseover="setHREF(this, true)" onmouseleave="setHREF(this, false)" download>DOWNLOAD</a></div>

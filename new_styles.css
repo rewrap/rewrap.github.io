@@ -128,8 +128,7 @@
     padding: 6px;
     line-height: 1.8;
     font-size: 25px;
-    color: white;
-    background-color: var(--specialBlack);
+    color: var(--specialBlack);
 }
 .textDiv a {
     color: var(--specialGreen);
