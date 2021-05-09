@@ -229,14 +229,10 @@
             // console.log("export triggered");
             var exportURL = canvas.toDataURL("image/png", 1);
             var exportIMG = document.getElementById("exportedImage"); //This will be an image in a hidden modal
-            exportIMG.setAttribute("class", "mask");
             exportIMG.setAttribute("src", exportURL);
             exportIMG.setAttribute("onload", "maskImage(this)");
-            if(document.getElementById("selectedPhoneMask").getAttribute("phone-category") == "ip") {
-                exportIMG.setAttribute("data-mask", "phone_masks/ip_temp_mask.png");
-            } else {
-                exportIMG.setAttribute("data-mask", "phone_masks/s_temp_mask.png");
-            }
+            var maskURL = document.getElementById("selectedPhoneMask").getAttribute("maskURL");
+            exportIMG.setAttribute("maskURL", maskURL);
         }
 
         function maskImage(element) {
@@ -248,7 +244,7 @@
             var height = element.height;
 
             var mask = document.createElement("img");
-            mask.src = element.getAttribute("data-mask");
+            mask.src = element.getAttribute("maskURL");
             mask.onload = function() {
                 maskCanvas.width  = width;
                 maskCanvas.height = height;
@@ -281,8 +277,6 @@
         var canvas = document.getElementById("uploadedImageCanvas");
         var context = canvas.getContext('2d');
         var canvasImage;
-        var mask = document.createElement("img");
-        mask.setAttribute("src", "phone_masks/ip_temp_mask.png");
 
         function updateImage() {
             var scale = Number(getComputedStyle(root).getPropertyValue("--scale"));
@@ -504,14 +498,19 @@
         var phoneTitle = document.getElementById("selectedPhoneName");
         var phoneMask = document.getElementById("selectedPhoneMask");
         var customImageDiv = document.getElementById("customImageDiv");
+        var invisSource;
+        var maskSource;
 
         if(params.has("phone")) {
             for(item of apple_phones) {
                 if(!modelFound) {
                     if(item.id == params.get("phone")) {
                         phoneTitle.innerHTML = item.name;
-                        phoneMask.setAttribute("src", "phone_outlines/ip_temp.png");
-                        phoneMask.setAttribute("phone-category", "ip"); //Temporary until all outlines/masks added
+                        invisSource = "phone_outlines/"+item.id+"invis.png";
+                        phoneMask.setAttribute("src", invisSource);
+                        maskSource = "phone_masks/"+item.id+"mask.png";
+                        phoneMask.setAttribute("maskURL", maskSource);
+                        console.log(phoneMask.getAttribute("maskURL"));
                         modelFound = true;
                     }
                 } else {
@@ -522,7 +521,11 @@
                 if(!modelFound) {
                     if(item.id == params.get("phone")) {
                         phoneTitle.innerHTML = item.name;
-                        phoneMask.setAttribute("src", "phone_outlines/s_temp.png");
+                        invisSource = "phone_outlines/"+item.id+"invis.png";
+                        phoneMask.setAttribute("src", invisSource);
+                        maskSource = "phone_masks/"+item.id+"mask.png";
+                        phoneMask.setAttribute("maskURL", maskSource);
+                        console.log(phoneMask.getAttribute("maskURL"));
                         modelFound = true;
                     }
                 } else {

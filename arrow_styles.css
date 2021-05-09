@@ -17,6 +17,7 @@
   width: 75px;
   height: 65px;
   transform: scale(0.75);
+  cursor: pointer;
 }
 #more-arrows:hover polygon {
   fill: #FFF;

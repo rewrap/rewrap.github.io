@@ -7,6 +7,7 @@ var samsung_phones = [
     { "name": "Galaxy S8", "id": "s8" },
     { "name": "Galaxy S7 Edge", "id":"s7edge" },
     { "name": "Galaxy S7", "id": "s7" },
+    { "name": "Galaxy S6 Edge", "id": "s6edge" },
     { "name": "Galaxy S6", "id": "s6"},
     { "name": "Galaxy A71", "id": "a71" },
     { "name": "Galaxy A70", "id": "a70" },
