@@ -291,9 +291,14 @@
             context.fillStyle = 'white';
             context.fillRect(0,0,canvas.width, canvas.height);
             context.save();
-            context.translate((canvas.width/2)+(xpos*scale*canvasImage.width),(canvas.height/2)+(ypos*scale*canvasImage.height));
+            context.translate(
+                (canvas.width/2)+(xpos*scale*canvasImage.width),
+                (canvas.height/2)+(ypos*scale*canvasImage.height)
+            );
             context.rotate(rotation*Math.PI/180);
-            context.drawImage(canvasImage,-canvasImage.width/2,-canvasImage.height/2,canvasImage.width*scale,canvasImage.height*scale);
+            context.drawImage(canvasImage,-canvasImage.width/2,-canvasImage.height/2,
+                canvasImage.width*scale,
+                canvasImage.height*scale);
             context.restore();
         }
 
