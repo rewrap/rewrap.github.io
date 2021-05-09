@@ -152,12 +152,15 @@
         function extendTopic(element) {
             var topicParent = element.parentNode.parentNode
             topicParent.classList.toggle("extendedHeight");
+            console.log(element.nextSibling);
+            element.nextElementSibling.classList.toggle("rotateArrow");
         }
         function expandHelpOne() {
             var element = document.getElementById("questionsContainer").firstElementChild;
             console.log(element);
             setTimeout(() => {
                 element.classList.add("extendedHeight");
+                element.firstElementChild.lastElementChild.classList.toggle("rotateArrow");
             }, 500);
         }
     </script>

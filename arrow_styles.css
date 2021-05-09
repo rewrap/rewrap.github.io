@@ -1,0 +1,67 @@
+.arrows {
+    position: absolute;
+    bottom: 50px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.arrows span {
+    display: none;
+    margin: 10px;
+    font-size: 10px;
+    color: white;
+}
+/* Arrow & Hover Animation */
+#more-arrows {
+  width: 75px;
+  height: 65px;
+  transform: scale(0.75);
+}
+#more-arrows:hover polygon {
+  fill: #FFF;
+  -webkit-transition: all .2s ease-out;
+  transition: all .2s ease-out;
+}
+#more-arrows:hover polygon.arrow-bottom {
+  -webkit-transform: translateY(-18px);
+          transform: translateY(-18px);
+}
+#more-arrows:hover polygon.arrow-top {
+  -webkit-transform: translateY(18px);
+          transform: translateY(18px);
+}
+#more-arrows.preLoad polygon {
+  fill: #FFF;
+  -webkit-transition: all .2s ease-out;
+  transition: all .2s ease-out;
+}
+#more-arrows.preLoad polygon.arrow-bottom {
+  -webkit-transform: translateY(-18px);
+          transform: translateY(-18px);
+}
+#more-arrows.preLoad polygon.arrow-top {
+  -webkit-transform: translateY(18px);
+          transform: translateY(18px);
+}
+
+polygon {
+  fill: #FFF;
+  -webkit-transition: all .2s ease-out;
+  transition: all .2s ease-out;
+}
+polygon.arrow-middle {
+  opacity: 0.75;
+}
+polygon.arrow-top {
+  opacity: 0.5;
+}
+
+@media (max-width: 800px) {
+    .arrows span {
+        display: block;
+    }
+    #more-arrows {
+        transform: scale(0.6);
+    }
+}

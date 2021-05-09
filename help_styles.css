@@ -41,6 +41,10 @@
     margin: 10px;
     font-size: 30px;
     font-family: Timeburner, sans-serif;
+    transform: rotate(0deg);
+    transition: transform, 0.25s ease-in-out;
+}
+span.rotateArrow {
     transform: rotate(90deg);
 }
 .helpTitle h1:hover, .helpTitle h1:hover+span {

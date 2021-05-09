@@ -60,7 +60,7 @@
     transform: skewY(-5deg);
 }
 #newsContainer > :nth-child(odd) > div > .image::before {
-    background-position: 0% 50%;
+    background-position: 0% 60%;
     -webkit-transform: skewY(5deg);
     -moz-transform: skewY(5deg);
     -o-transform: skewY(5deg);
@@ -73,7 +73,7 @@
     transform: skewY(5deg);
 }
 #newsContainer > :nth-child(even) > div > .image::before {
-    background-position: 100% 0%;
+    background-position: 100% 60%;
     -webkit-transform: skewY(-5deg);
     -moz-transform: skewY(-5deg);
     -o-transform: skewY(-5deg);
@@ -140,7 +140,7 @@
     position: absolute;
     content: "";
     width: 50vw;
-    height: 100vh;
+    height: 150vh;
     top: -25%;
     left: 0;
     z-index: -1;
