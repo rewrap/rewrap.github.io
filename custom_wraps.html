@@ -296,9 +296,13 @@
                 (canvas.height/2)+(ypos*scale*canvasImage.height)
             );
             context.rotate(rotation*Math.PI/180);
-            context.drawImage(canvasImage,-canvasImage.width/2,-canvasImage.height/2,
-                canvasImage.width*scale,
-                canvasImage.height*scale);
+            context.drawImage(canvasImage,
+                //Draw position
+                (-canvasImage.width*scale*(canvas.height/canvasImage.height))/2,
+                (-canvasImage.height*scale*(canvas.height/canvasImage.height))/2,
+                //Draw size
+                canvasImage.width*scale*(canvas.height/canvasImage.height),
+                canvasImage.height*scale*(canvas.height/canvasImage.height));
             context.restore();
         }
 
@@ -312,8 +316,8 @@
             try {
                 createImageBitmap(imageData).then(function(response) {
                     var containerSize = document.getElementById("selectedPhoneMask").getBoundingClientRect();
-                    var canvasHeight= response.height+"px";
-                    var canvasWidth = response.height*(containerSize.width/containerSize.height)+"px";
+                    var canvasHeight= 1500+"px";
+                    var canvasWidth = 1500*(containerSize.width/containerSize.height)+"px";
                     uploadedImageCanvas.setAttribute("height", canvasHeight);
                     uploadedImageCanvas.setAttribute("width", canvasWidth);
                     canvasImage = response;
