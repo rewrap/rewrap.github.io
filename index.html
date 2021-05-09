@@ -127,9 +127,9 @@
     <script>
         // Step 1: Fade in image when file loads
         function fadeImage(element) {
-            document.getElementById("more-arrows").classList.add("preLoad");
             var image = document.getElementById(element);
             if(!image.classList.contains("fadeIn")) {
+                document.getElementById("more-arrows").classList.add("preLoad");
                 image.classList.add("fadeIn");
                 image.addEventListener("animationend", startScrolling);
                 // startScrolling();

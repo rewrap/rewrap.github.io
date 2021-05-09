@@ -58,6 +58,10 @@ polygon.arrow-top {
 }
 
 @media (max-width: 800px) {
+    .arrows {
+        position: unset;
+        margin-top: 60px;
+    }
     .arrows span {
         display: block;
     }
