@@ -357,7 +357,7 @@
             } catch(error) {
                 console.log("Attempted to load "+imageData);
                 console.log("Error: "+ error);
-                window.alert("Image uploading does not work on Safari, please use Chrome on a non-mobile device");
+                // window.alert("Image uploading does not work on Safari, please use Chrome on a non-mobile device");
                 canvasImage = createObjectURL(imageData);
                 updateImage();
             }
