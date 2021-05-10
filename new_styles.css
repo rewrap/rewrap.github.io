@@ -131,7 +131,9 @@
     color: var(--specialBlack);
 }
 .textDiv a {
+    padding: 3px;
     color: var(--specialGreen);
+    background-color: var(--specialBlack);
 }
 
 /* Image */
