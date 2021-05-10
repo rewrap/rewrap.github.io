@@ -31,7 +31,7 @@
                     <li>Address for wrap to be shipped to (if buying from outside Kingsway, bank details will be sent afterwards).</li>
                     <li>Preferred payment method if picking up in person (bank or cash).</li>
                 </ul>
-                <p>Each custom wrap takes time to produce, so please allow for up to two weeks to receive your product.</p>
+                <p>Each custom wrap takes time to produce, so please allow for 1-1.5 weeks to receive your product.</p>
             </div>
             <img id="exportedImage" alt="exported image">
         </div>
@@ -330,6 +330,21 @@
             }
             // Generate canvas based on image data
             try {
+                /* Safari and Edge polyfill for createImageBitmap
+                * https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/createImageBitmap
+                */
+                if (!('createImageBitmap' in window)) {
+                    console.log("doing something?");
+                    window.createImageBitmap = async function(blob) {
+                        return new Promise((resolve,reject) => {
+                            let img = document.createElement('img');
+                            img.addEventListener('load', function() {
+                                resolve(this);
+                            });
+                            img.src = URL.createObjectURL(blob);
+                        });
+                    }
+                }
                 createImageBitmap(imageData).then(function(response) {
                     var containerSize = document.getElementById("selectedPhoneMask").getBoundingClientRect();
                     var canvasHeight= 1500+"px";
