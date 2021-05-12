@@ -1,7 +1,7 @@
-#presetsLI {
+#presetsLI, #presetsLIMobile {
     border-bottom-color: var(--specialGreen);
 }
-#presetsLI a {
+#presetsLI a, #presetsLIMobile a {
     font-weight: 600;
     color: var(--specialGreen);
 }

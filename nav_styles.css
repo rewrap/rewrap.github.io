@@ -1,14 +1,17 @@
 #navContainer {
     display: flex;
     position: sticky;
-    z-index: 3;
+    z-index: 5;
     top:0;
     width: 100%;
-    min-height: 90px;
+    height: 90px;
     background-color: var(--specialBlack);
     align-items: center;
     overflow-x: hidden;
     overflow-y: hidden;
+}
+#menuButton, #mobileNav {
+    display: none;
 }
 #navLogo {
     position: absolute;
@@ -16,9 +19,9 @@
     z-index: 3;
     width: auto;
     height: 70%;
-    /* margin: 0 0 0 10px; */
     transform: translate(10px);
     cursor: pointer;
+    transition: all 0.08s;
 }
 #navLogo:hover {
     height: 71%;
@@ -87,5 +90,22 @@
 @media (max-width: 1100px) {
     #navContainer ul {
         display: none;
+    }
+    #navLogo {
+        position: unset;
+        width: auto;
+        height: 70%;
+        margin: 0 auto 0 auto;
+        transform: translate(0px);
+    }
+    #navLogo:hover {
+        height: 70%;
+        transform: scale(1.03) translate(0px);
+    }
+    #menuButton {
+        display: block;
+    }
+    #mobileNav {
+        display: block;
     }
 }

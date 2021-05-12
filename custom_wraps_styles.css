@@ -1,7 +1,7 @@
-#customLI {
+#customLI, #customLIMobile {
     border-bottom-color: var(--specialGreen);
 }
-#customLI a {
+#customLI a, #customLIMobile a {
     font-weight: 600;
     color: var(--specialGreen);
 }

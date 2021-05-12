@@ -7,6 +7,7 @@
     <title>ReWrap | Stickers</title>
     <link rel="stylesheet" href="variables.css">
     <link rel="stylesheet" href="nav_styles.css">
+    <link rel="stylesheet" href="nav_mobile_styles.css">
     <link rel="stylesheet" href="stickers_styles.css">
     <link rel="stylesheet" href="main_styles.css">
     <link rel="stylesheet" href="footer_styles.css">
@@ -15,6 +16,7 @@
 <body onload="changeImage()" onresize="changeImage()">
     <!-- Nav bar -->
     <div id="navContainer">
+        <div id="menuButton" onclick="openMobileNav(this)"><div></div></div>
         <img id="navLogo" src="ui_images/nav_logo.svg" alt="ReWrap Logo" onmousedown="redirect('index.html', event)">
         <ul>
             <li id="whatnewLI"><a href="new.html">What's New</a></li>
@@ -23,6 +25,15 @@
             <li id="stickersLI"><a href="stickers.html">Stickers</a></li>
         </ul>
         <div id="helpIcon" onmousedown="redirect('help.html', event)"><p>?</p></div>
+    </div>
+    <!-- Mobile Nav Menu -->
+    <div id="mobileNav">
+        <ul>
+            <li id="whatnewLIMobile"><a href="new.html">What's New</a></li>
+            <li id="customLIMobile"><a href="phone_selection.html?type=custom">Custom</a></li>
+            <li id="presetsLIMobile"><a href="phone_selection.html?type=presets">Presets</a></li>
+            <li id="stickersLIMobile"><a href="stickers.html">Stickers</a></li>
+        </ul>
     </div>
 
     <!-- Placeholder Images -->

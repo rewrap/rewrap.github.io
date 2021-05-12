@@ -1,7 +1,7 @@
-#whatnewLI {
+#whatnewLI, #whatnewLIMobile {
     border-bottom-color: var(--specialGreen);
 }
-#whatnewLI a {
+#whatnewLI a, #whatnewLIMobile a {
     font-weight: 600;
     color: var(--specialGreen);
 }

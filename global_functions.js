@@ -6,6 +6,13 @@ function redirect(href, event) {
     }
 }
 
+// Toggle hamburger menu
+function openMobileNav(button) {
+    document.getElementById("mobileNav").style.transition = "all 0.3s";
+    button.classList.toggle("menuOpen");
+    document.getElementById("mobileNav").classList.toggle("menuOpen");
+}
+
 function backToTop() {
     document.getElementById("subNav").scrollIntoView({ behavior: "smooth", block: "end" });
 }
