@@ -53,6 +53,10 @@
         <div id="samsungPhonesContainer" class="phoneImageContainer">
             <!-- Items automatically inserted by script -->
         </div>
+        <h1>Other Phones</h1>
+        <div id="otherPhonesContainer" class="phoneImageContainer">
+            <!-- Items automatically inserted by script -->
+        </div>
     </div>
     
 
@@ -110,6 +114,7 @@
     <!-- Dynamically add phones to page -->
     <script src="apple_phones.js"></script> <!-- Apple phones array -->
     <script src="samsung_phones.js"></script> <!-- Samsung phones array -->
+    <script src="other_phones.js"></script><!-- Other phones array -->
 
     <script>
         const params = new URLSearchParams(window.location.search);
@@ -186,6 +191,39 @@
             
             // Append complete div to website
             document.getElementById("samsungPhonesContainer").appendChild(a);
+        }
+
+        // Create items for Other phones
+        for(item of other_phones) {
+            // Create div element (container for phone item)
+            var div = document.createElement("div");
+            
+            // Create image element (phone SVG)
+            var img = document.createElement("img");
+            // Set the image source and alt
+            var src = "phone_vectors/"+item.id+".svg";
+            img.setAttribute("src", src);
+            img.setAttribute("alt", item.name);
+            // Append image to div
+            div.appendChild(img);
+            
+            // Create span element (phone name)
+            var span = document.createElement("span");
+            // Set span text
+            span.innerHTML = item.name;
+            // Append text to div
+            div.appendChild(span);
+            
+            // Create link element
+            var a = document.createElement("a");
+            // Set link url
+            var href = redirectUrl+item.id;
+            a.setAttribute("href", href);
+            // Append div to link
+            a.appendChild(div);
+            
+            // Append complete div to website
+            document.getElementById("otherPhonesContainer").appendChild(a);
         }
     </script>
 

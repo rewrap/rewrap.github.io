@@ -544,6 +544,7 @@
     <!-- Set phone model mask and title / Initialise wrap preview -->
     <script src="apple_phones.js"></script> <!-- Apple phones array -->
     <script src="samsung_phones.js"></script> <!-- Samsung phones array -->
+    <script src="other_phones.js"></script><!-- Other phones array -->
 
     <script>
         const params = new URLSearchParams(window.location.search);
@@ -571,6 +572,21 @@
                 }
             }
             for(item of samsung_phones) {
+                if(!modelFound) {
+                    if(item.id == params.get("phone")) {
+                        phoneTitle.innerHTML = item.name;
+                        invisSource = "phone_outlines/"+item.id+"invis.png";
+                        phoneMask.setAttribute("src", invisSource);
+                        maskSource = "phone_masks/"+item.id+"mask.png";
+                        phoneMask.setAttribute("maskURL", maskSource);
+                        console.log(phoneMask.getAttribute("maskURL"));
+                        modelFound = true;
+                    }
+                } else {
+                    break;
+                }
+            }
+            for(item of other_phones) {
                 if(!modelFound) {
                     if(item.id == params.get("phone")) {
                         phoneTitle.innerHTML = item.name;
