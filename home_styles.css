@@ -199,7 +199,7 @@
 }
 #imgDiv4 {
     /* Stickers */
-    background-image: url(assets/stickers_phone_view.png);
+    background-image: url(ui_images/stickers_phone_view_optimised.png);
 }
 .textDiv {
     display: flex;
