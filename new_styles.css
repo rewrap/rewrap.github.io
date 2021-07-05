@@ -158,6 +158,9 @@
 #image2::before {
     background-image: url(assets/upcoming_releases.png);
 }
+#image3::before {
+    background-image: url(assets/YES\ Logo.png);
+}
 
 @media (max-width: 1150px) {
     .skewedChild {
