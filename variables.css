@@ -8,6 +8,7 @@
     --brightness: 50%;
     --attachment: fixed;
     --backgroundSize: 50%;
+    --hideState: none;
 
     /* Custom wrap settings */
     --source: url("");

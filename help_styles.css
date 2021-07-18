@@ -79,6 +79,9 @@ span.rotateArrow {
     font-size: 300px;
     font-weight: 700;
 }
+.variableHide {
+    display: var(--hideState);
+}
 
 @media (max-width: 600px) {
     .helpTitle h1 {
