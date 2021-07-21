@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="keywords" content="ReWrap stickers, ReWrap custom stickers, ReWrap New Zealand stickers, ReWrap NZ stickers,
         custom stickers, custom stickers NZ, custom stickers New Zealand">
-    <meta name="description" content="Buy as many stickers as you can fit on a page! [COMING SOON]">
+    <meta name="description" content="Buy as many stickers as you can fit on a page! [AVAILABLE NOW]">
     <title>Stickers | ReWrap New Zealand</title>
     <link rel="stylesheet" href="variables.css">
     <link rel="stylesheet" href="nav_styles.css">
@@ -14,9 +14,38 @@
     <link rel="stylesheet" href="stickers_styles.css">
     <link rel="stylesheet" href="main_styles.css">
     <link rel="stylesheet" href="footer_styles.css">
+    <link rel="stylesheet" href="loading_animation.css">
     <link rel="shortcut icon" href="assets/site_icon.ico">
 </head>
-<body onload="changeImage()" onresize="changeImage()">
+<body onload="checkMobile()" onresize="checkMobile()">
+    <div id="loadRingsContainer" class="hiddenModal">
+        <div class="lds-ring">loading...<div></div><div></div><div></div><div></div></div>
+    </div>
+    <div id="exportModal" class="hiddenModal">
+        <div id="exportedImageDIV">
+            <div id="purchaseInstructions">
+                <h1>Purchase Instructions</h1>
+                <p>1. Download your custom stickers with the button below.</p>
+                <p>2. Send an email to <a onclick="emailPrompt()" title="rewrapvinyl@gmail.com">rewrapvinyl@gmail.com</a> and attach
+                    the downloaded image. Please include your name and applicable order details:</p>
+                <ul>
+                    <li>Page size (half, full, individual)</li>
+                    <li>Form class for stickers to be delivered to (if Kingsway school student).</li>
+                    <li>Address for wrap to be shipped to (if buying from outside Kingsway, bank details will be sent afterwards).</li>
+                    <li>Preferred payment method if picking up in person (bank or cash).</li>
+                </ul>
+                <p>Each set of custom stickers takes time to produce, so please allow for 1-1.5 weeks to receive your product.</p>
+            </div>
+            <img id="exportedImage" alt="exported image">
+        </div>
+        <div id="buttonsContainer">
+            <div><a onclick="hideModal()">BACK</a></div>
+            <div><a id="downloadButton" onmouseover="setHREF(this, true)" onmouseleave="setHREF(this, false)" download>DOWNLOAD</a></div>
+            <!-- <div><a>BUY NOW</a></div> -->
+        </div>
+    </div>
+
+
     <!-- Nav bar -->
     <div id="navContainer">
         <div id="menuButton" onclick="openMobileNav(this)"><div></div></div>
@@ -39,9 +68,73 @@
         </ul>
     </div>
 
-    <!-- Placeholder Images -->
-    <img id="desktopPlaceholder" class="placeholderImage" src="assets/stickers_desktop_view.png" alt="coming soon placeholder image">
-    <img id="mobilePlaceholder" class="placeholderImage" src="assets/stickers_phone_view.png" alt="coming soon placeholder image">
+    <!-- Sub-Nav -->
+    <div id="subNav">
+        <span id="subNavHeading">>>&#160;</span><span>Upload images to be turned into stickers</span>
+    </div>
+    
+    <!-- Stickers flex box -->
+    <div id="stickersFlexContainer">
+
+        <!-- Canvas container -->
+        <div id="canvasContainer">
+            <div id="rulerContainer">
+                <img id="fillerSquare" src="assets/square.png">
+                <img id="heightRuler" class="ruler" src="assets/vertical_ruler.svg">
+                <canvas id="stickerCanvas" width="2300" height="1700" style="width: 690px; height: 510px;"></canvas>
+                <br>
+                <img id="widthRuler" class="ruler" src="assets/horizontal_ruler.svg">
+            </div>
+        </div>
+
+        <!-- Controls container -->
+        <form id="pageSizeForm">
+            <div class="numberedHeading"><span class="number">1.</span><span class="heading">Select page size</span></div>
+            <!-- Page sizes container -->
+            <div id="radioButtons">
+                <!-- Full page button -->
+                <label>
+                    <input id="fullPageButton" onclick="updatePageSize(this)" type="radio" name="pageSize" value="full" checked>
+                    <span class="checkmark"></span>
+                    <span class="text">Full Page (23cm x 17cm) - $10</span>
+                </label>
+                <!-- Half page button -->
+                <label>
+                    <input id="halfPageButton" onclick="updatePageSize(this)" type="radio" name="pageSize" value="half">
+                    <span class="checkmark"></span>
+                    <span class="text">Half Page (17cm x 11.5cm) - $6</span>
+                </label>
+                <!-- Individual sticker button -->
+                <label>
+                    <input id="individualButton" onclick="updatePageSize(this)" type="radio" name="pageSize" value="individual">
+                    <span class="checkmark"></span>
+                    <span class="text">Individual Sticker (8cm x 8cm) - $2</span>
+                </label>
+            </div>
+
+            <div class="numberedHeading">
+                <span class="number">2.</span>
+                <label>
+                    <a id="uploadImages" class="blackButton">Upload Images</a>
+                    <input id="fileReader" type="file" accept="image/*">
+                </label>
+            </div>
+            <p>note: upload as many images as you want, but please ensure there is no overlap between images</p>
+
+            <div class="numberedHeading">
+                <span class="number">3.</span>
+                <a id="confirmDesign" class="blackButton" onclick="startLoad(true)">Confirm design</a>
+            </div>
+        </form>
+
+    <!-- End of stickers flex box -->
+    </div>
+        
+        
+    <!-- Sub-Footer -->
+    <div id="subFooter">
+        <span onclick="backToTop()">Back to top ▲</span>
+    </div>
 
     <!-- Footer -->
     <div id="footerContainer">
@@ -63,22 +156,225 @@
     <!-- Scripts -->
     <!--#########-->
 
-    <script src=global_functions.js></script>
+    <script src="global_functions.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.5.0/fabric.min.js"></script>
 
-
+    <!-- Set canvas size -->
     <script>
-        var desktopPlaceholder = document.getElementById("desktopPlaceholder");
-        var mobilePlaceholder = document.getElementById("mobilePlaceholder");
+        const root = document.querySelector(":root");
+        const canvas = document.getElementById("stickerCanvas");
+        var fabricCanvas = new fabric.Canvas("stickerCanvas", );
+        var width = 23;
+        var height = 17;
+
+        // Draw guideline corners
+        function drawCorners() {
+            fabricCanvas.add(new fabric.Rect({
+                left: 0,
+                top: 0,
+                fill: 'grey',
+                width: 10,
+                height: 10,
+                selectable: false
+            }));
+            fabricCanvas.add(new fabric.Rect({
+                left: width*100-10,
+                top: height*100-10,
+                fill: 'grey',
+                width: 10,
+                height: 10,
+                selectable: false
+            }));
+        }
+
+        // Initialise canvas dimensions and guides
+        fabricCanvas.setDimensions({width: width*30+"px", height: height*30+"px"}, {cssOnly:true});
+        drawCorners();
+
+
+        function updatePageSize(selectedButton) {
+            // Clear canvas
+            fabricCanvas.clear();
+            // Update CSS values in root
+            switch(selectedButton.value) {
+                case "full":
+                    width = 23;
+                    height = 17;
+                    break;
+                case "half":
+                    width = 17;
+                    height = 11.5;
+                    break;
+                case "individual":
+                    width = 8;
+                    height = 8;
+                    break;
+            }
+            // Update CSS values
+            root.style.setProperty("--canvasWidth", width*30+"px");
+            root.style.setProperty("--canvasHeight", height*30+"px");
+            // Update fabric canvas
+            fabricCanvas.setDimensions({width: width*100, height: height*100}, {backstoreOnly:true});// Canvas Dimensions
+            fabricCanvas.setDimensions({width: width*30+"px", height: height*30+"px"}, {cssOnly:true});// CSS Dimensions
+            // Redraw guides
+            drawCorners();
+        }
+    </script>
+
+    <!-- Fabric JS image uploading -->
+    <script>
+        document.getElementById("fileReader").onchange = function handleImage(e) {
+            var reader = new FileReader();
+            reader.onload = function (event) {
+                console.log('reader loaded');
+                var imgObj = new Image();
+                imgObj.src = event.target.result;
+                imgObj.onload = function () {
+                    // start fabricJS stuff
+                    var image = new fabric.Image(imgObj);
+                    image.set({
+                        left: 50,
+                        top: 50,
+                        angle: 0,
+                        padding: 10,
+                        borderScaleFactor: 2,
+                        cornersize: 20,
+                        transparentCorners: false,
+                    });
+
+                    let imgWidth = image.width;
+                    let imgHeight = image.height;
+                    let fabricCanvasWidth = fabricCanvas.getWidth();
+                    let fabricCanvasHeight = fabricCanvas.getHeight();
+
+                    let imgRatio = imgWidth / imgHeight;
+                    let fabricCanvasRatio = fabricCanvasWidth / fabricCanvasHeight;
+                    if(imgRatio <= fabricCanvasRatio){
+                        if(imgHeight> fabricCanvasHeight){
+                        image.scaleToHeight(fabricCanvasHeight);
+                        }
+                    }else{
+                        if(imgWidth> fabricCanvasWidth){
+                        image.scaleToWidth(fabricCanvasWidth);
+                        }
+                    }
+
+                    fabricCanvas.add(image);
+                    fabricCanvas.centerObject(image);
+                    fabricCanvas.setActiveObject(image);
+                    fabricCanvas.getActiveObject().setControlsVisibility({
+                        mt: false, // middle top disable
+                        mb: false, // midle bottom
+                        ml: false, // middle left
+                        mr: false, // I think you get it
+                    });
+
+
+                    // end fabricJS stuff
+                }
+            }
+            reader.readAsDataURL(e.target.files[0]);
+            document.getElementById("fileReader").value = "";
+        }
         
-        function changeImage() {
-            var w = window.innerWidth;
-            var h = window.innerHeight;
-            if(w > h) {
-                desktopPlaceholder.style.display = "block";
-                mobilePlaceholder.style.display = "none";
+
+    </script>
+
+    <!-- Delete icon -->
+    <script>
+        var deleteIcon = "data:image/svg+xml,%3C%3Fxml version='1.0' encoding='utf-8'%3F%3E%3C!DOCTYPE svg PUBLIC '-//W3C//DTD SVG 1.1//EN' 'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'%3E%3Csvg version='1.1' id='Ebene_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='595.275px' height='595.275px' viewBox='200 215 230 470' xml:space='preserve'%3E%3Ccircle style='fill:%23F44336;' cx='299.76' cy='439.067' r='218.516'/%3E%3Cg%3E%3Crect x='267.162' y='307.978' transform='matrix(0.7071 -0.7071 0.7071 0.7071 -222.6202 340.6915)' style='fill:white;' width='65.545' height='262.18'/%3E%3Crect x='266.988' y='308.153' transform='matrix(0.7071 0.7071 -0.7071 0.7071 398.3889 -83.3116)' style='fill:white;' width='65.544' height='262.179'/%3E%3C/g%3E%3C/svg%3E";
+        var img = document.createElement('img');
+        img.src = deleteIcon;
+
+        fabric.Object.prototype.transparentCorners = false;
+        fabric.Object.prototype.cornerColor = 'blue';
+        fabric.Object.prototype.cornerStyle = 'circle';
+        fabric.Object.prototype.cornerSize = 40;
+
+        fabric.Object.prototype.controls.deleteControl = new fabric.Control({
+            x: 0.5,
+            y: -0.5,
+            // offsetY: 16,
+            cursorStyle: 'pointer',
+            mouseUpHandler: deleteObject,
+            render: renderIcon,
+            cornerSize: 80
+        });
+
+
+
+        function deleteObject(eventData, transform) {
+            var target = transform.target;
+            var fabricCanvas = target.canvas;
+            fabricCanvas.remove(target);
+            fabricCanvas.requestRenderAll();
+        }
+
+        function renderIcon(ctx, left, top, styleOverride, fabricObject) {
+            var size = this.cornerSize;
+            ctx.save();
+            ctx.translate(left, top);
+            ctx.rotate(fabric.util.degreesToRadians(fabricObject.angle));
+            ctx.drawImage(img, -size / 2, -size / 2, size, size);
+            ctx.restore();
+        }
+
+    </script>
+
+    <!-- Preview modal functions -->
+    <script>
+        // Close container
+        var previewContainer = document.getElementById("exportModal");
+        function hideModal() {
+            previewContainer.style.display = "none";
+        }
+
+        // Add and remove HREF to try reduce lag
+        var exportedImage = document.getElementById("exportedImage");
+        function setHREF(element, addURL) {
+            if(addURL) {
+                element.setAttribute("href", exportedImage.src);
             } else {
-                desktopPlaceholder.style.display = "none";
-                mobilePlaceholder.style.display = "block";
+                element.removeAttribute("href");
+            }
+        }
+    </script>
+
+
+    <!-- Export image -->
+    <script>
+        var loadScreen = document.getElementById("loadRingsContainer");
+        
+        function startLoad(firstRun) {
+            if(firstRun) {
+                loadScreen.style.display = "flex";
+                fabricCanvas.discardActiveObject().renderAll();
+            }
+            if(getComputedStyle(loadScreen).display == "flex") {
+                setTimeout(() => {
+                    exportDiv();
+                }, 200);
+            } else {
+                startLoad(false);
+            }
+
+        }
+        function exportDiv() {
+            console.log("export triggered");
+            var exportURL = canvas.toDataURL("image/png", 1);
+            var exportIMG = document.getElementById("exportedImage"); //This will be an image in a hidden modal
+            exportIMG.setAttribute("src", exportURL);
+            loadRingsContainer.style.display = "none";
+            previewContainer.style.display = "flex";
+        }
+    </script>
+
+    <!-- Redirect if mobile -->
+    <script>
+        function checkMobile() {
+            var w = window.innerWidth;
+            if(w < 705) {
+                redirect("use_desktop.html");
             }
         }
     </script>

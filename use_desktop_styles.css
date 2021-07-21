@@ -1,0 +1,11 @@
+#stickersLI, #stickersLIMobile {
+    border-bottom-color: var(--specialGreen);
+}
+#stickersLI a, #stickersLIMobile a {
+    font-weight: 600;
+    color: var(--specialGreen);
+}
+.placeholderImage {
+    display: block;
+    width: 100%;
+}

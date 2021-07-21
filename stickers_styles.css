@@ -5,7 +5,237 @@
     font-weight: 600;
     color: var(--specialGreen);
 }
-.placeholderImage {
-    display: block;
+
+/* Main page container */
+#stickersFlexContainer {
+    display: flex;
     width: 100%;
+    padding: 40px 0 100px 0;
+    height: auto;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    background-color: var(--specialGrey);
+}
+
+/* Parent container for canvas */
+#canvasContainer {
+    display: flex;
+    padding: 50px;
+    justify-content: center;
+    background-color: var(--specialGrey);
+}
+#rulerContainer {
+    position: relative;
+    width: 690px;
+    height: 510px;
+}
+#heightRuler {
+    position: absolute;
+    left: -26px;
+    height: 510px;
+}
+#widthRuler {
+    position: absolute;
+    top: -26px;
+    width: 690px;
+}
+#fillerSquare {
+    position: absolute;
+    top: -26px;
+    left: -26px;
+}
+.ruler {
+    display: inline-block;
+    background-color: white;
+    width: auto;
+    height: auto;
+}
+#stickerCanvas {
+    display: inline-block;
+    width: var(--canvasWidth);
+    background-color: white ;
+}
+
+/* Form containing sticker sheet controls */
+#pageSizeForm {
+    display: flex;
+    width: 450px;
+    height: 550px;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 0 20px 20px 20px;
+    border-radius: 35px;
+    background-color: white;
+}
+/* Coloured number and heading pairs */
+.numberedHeading {
+    margin: 20px 0 5px 0;
+}
+/* Green number */
+.number {
+    font-size: 45px;
+    color: #14B495;
+}
+/* Main heading */
+.heading {
+    margin-left: 10px;
+    font-size: 30px;
+}
+/* Following text */
+.numberedHeading + p {
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+/* Parent container for all radio buttons */
+#radioButtons {
+    margin: 0 0 30px 12px;
+}
+/* Parent container for each option */
+#radioButtons label {
+    display: flex;
+    margin: 5px 0 5px 0;
+    justify-content: flex-start;
+    align-items: center;
+}
+/* Hidden input field */
+#radioButtons input, #fileReader {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+/* Text for each option */
+.text {
+    padding: 10px;
+    border-radius: 7px;
+    background-color: var(--specialBlack);
+    color: white;
+    transition: background-color 0.12s;
+}
+/* Check mark for each option */
+.checkmark {
+    height: 20px;
+    width: 20px;
+    margin-right: 10px;
+    border-radius: 50%;
+    border-style: solid;
+    border-width: 2px;
+    border-color: #14B495;
+}
+#radioButtons label:hover .checkmark {
+    background-color: #14b49459;
+}
+#radioButtons input:checked ~ .checkmark {
+  background-color: #14B495;
+}
+
+/* Clickable rectangle black buttons */
+.blackButton {
+    font-size: 30px;
+    padding: 12px;
+    text-decoration: none;
+    /* line-height: 1.6; */
+    white-space: nowrap;
+    color: white;
+    background-color: black;
+    cursor: pointer;
+    /* border-style: solid; */
+    border-color: white;
+    border-width: 2px;
+    transition: background-color 0.12s;
+}
+.blackButton:hover {
+    background-color: rgb(55, 55, 55);
+}
+
+
+/* Hidden stuff for export */
+
+
+.hiddenModal {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    background-color: rgba(80, 80, 80, 0.7);
+    backdrop-filter: blur(7px);
+}
+#exportModal {
+    display: none;
+    padding: 40px 0 0 0;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+#loadRingsContainer {
+    display: none;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+#loadRingsContainer > div {
+    color: white;
+    transform: scale(2);
+}
+
+#exportedImageDIV {
+    display: flex;
+    flex-wrap: wrap-reverse;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    height: 80%;
+    /* box-shadow: 0 0 20px pink; */
+}
+#purchaseInstructions {
+    max-width: 600px;
+    margin: 30px;
+    padding: 15px;
+    background-color: white;
+    border-radius: 20px;
+}
+#purchaseInstructions h1 {
+    font-size: 35px;
+}
+#purchaseInstructions p, #purchaseInstructions strong {
+    font-size: 18px;
+}
+#purchaseInstructions a {
+    text-decoration: underline;
+    cursor: pointer;
+}
+#exportedImageDIV img {
+    height: 75%;
+    border-style: dashed;
+    border-width: 1px;
+    border-color: black;
+}
+#buttonsContainer {
+    display: flex;
+    width: auto;
+    height: auto;
+    margin: 20px;
+    padding: 12px 0 12px 0;
+    justify-content: space-between;
+}
+#buttonsContainer a {
+    font-size: 30px;
+    margin: 0 24px 0 24px;
+    padding: 12px;
+    text-decoration: none;
+    /* line-height: 1.6; */
+    white-space: nowrap;
+    color: white;
+    background-color: black;
+    cursor: pointer;
+    /* border-style: solid; */
+    border-color: white;
+    border-width: 2px;
+    transition: background-color 0.12s;
+}
+#buttonsContainer a:hover {
+    background-color: rgb(55, 55, 55);
 }
