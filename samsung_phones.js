@@ -2,6 +2,7 @@ var samsung_phones = [
     { "name": "Galaxy S20", "id": "s20" },
     { "name": "Galaxy S10+", "id": "s10plus" },
     { "name": "Galaxy S10", "id": "s10" },
+    { "name": "Galaxy S10e", "id": "s10e" },
     { "name": "Galaxy S9+", "id": "s9plus" },
     { "name": "Galaxy S9", "id": "s9" },
     { "name": "Galaxy S8+", "id": "s8plus" },
